@@ -1548,7 +1548,7 @@ export default function ResultPage() {
             COMPRAR AHORA
             <ArrowRight className="w-5 h-5 ml-2" />
           </Button>
-          <p className="text-red-400 text-sm mt-2 font-semibold">⚠️ ¡Esta oferta expira pronto!</p>
+          <p className="text-red-400 text-sm mt-2 font-semibold">⚠️ ¡Esta oferta expira pronto! </p>
         </motion.div>
       </div>
     </div>
