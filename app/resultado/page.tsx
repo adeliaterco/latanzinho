@@ -1520,7 +1520,7 @@ export default function ResultPage() {
                   className="w-full rounded-lg overflow-hidden shadow-lg"
                 >
                   <img
-                    src="https://optimalhealthscout.shop/wp-content/uploads/2025/05/02-depoimento-1.png"
+                    src="https://optimalhealthscout.shop/wp-content/uploads/2025/06/ES-depoimento-01-pronto.png"
                     alt="Testimonio de Cliente"
                     className="w-full h-auto object-cover"
                   />
