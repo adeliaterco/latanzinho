@@ -1273,14 +1273,13 @@ export default function ResultPage() {
             <CardContent className="p-8 text-center">
               <div className="mb-6">
                 <div className="text-red-400 text-2xl font-bold mb-2">
-                  <span className="line-through">VALOR TOTAL: $145</span>
+                  <span className="line-through">VALOR TOTAL: $197</span>
                 </div>
-                <div className="text-6xl font-bold text-yellow-400 mb-2">$18</div>
-                <div className="text-2xl text-orange-400 font-bold">O 3x DE $6</div>
+                <div className="text-6xl font-bold text-yellow-400 mb-2">$9</div>
               </div>
 
               <div className="bg-gradient-to-r from-yellow-500 to-orange-500 text-black font-bold py-3 px-6 rounded-lg inline-block mb-4">
-                💰 ¡AHORRO DE $127 HOY!
+                💰 ¡AHORRO DE $188 HOY!
               </div>
 
               <p className="text-lg mb-6">¡Menos que el precio de un almuerzo en el centro comercial!</p>
