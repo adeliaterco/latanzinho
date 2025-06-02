@@ -1199,7 +1199,7 @@ export default function ResultPage() {
                 </div>
 
                 <div className="mt-8 text-center">
-                  <div className="text-4xl font-bold text-orange-400">VALOR TOTAL: $145</div>
+                  <div className="text-4xl font-bold text-orange-400">VALOR TOTAL: $197</div>
                 </div>
               </CardContent>
             </Card>
