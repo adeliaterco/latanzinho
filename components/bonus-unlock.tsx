@@ -73,7 +73,7 @@ export function BonusUnlock({ bonus, onComplete }: BonusUnlockProps) {
             >
               <h3 className="text-xl font-semibold text-orange-700 mb-2">{bonus.title}</h3>
               <p className="text-gray-700 mb-4">{bonus.description}</p>
-              <div className="text-3xl font-bold text-green-600">Valor: R$ {bonus.value}</div>
+              <div className="text-3xl font-bold text-green-600">Valor: $ {bonus.value}</div>
             </motion.div>
 
             <motion.div
