@@ -29,11 +29,11 @@ import { BonusUnlock } from "@/components/bonus-unlock"
 import { ValueCounter } from "@/components/value-counter"
 import { LoadingAnalysis } from "@/components/loading-analysis"
 
-// Função para enviar eventos ao Google Analytics
-function enviarEvento(nome_evento, propriedades = {}) {
+// Función para enviar eventos a Google Analytics
+function enviarEvento(nombre_evento, propriedades = {}) {
   if (typeof window !== 'undefined' && window.gtag) {
-    window.gtag('event', nome_evento, propriedades);
-    console.log('Evento enviado:', nome_evento, propriedades);
+    window.gtag('event', nombre_evento, propriedades);
+    console.log('Evento enviado:', nombre_evento, propriedades);
   }
 }
 
@@ -56,7 +56,7 @@ export default function QuizStep() {
   const progress = (step / 14) * 100
 
   useEffect(() => {
-    // Load saved data
+    // Cargar datos guardados
     const saved = localStorage.getItem("quizData")
     const savedBonuses = localStorage.getItem("unlockedBonuses")
     const savedValue = localStorage.getItem("totalValue")
@@ -67,18 +67,18 @@ export default function QuizStep() {
     if (savedValue) setTotalValue(Number.parseInt(savedValue))
     if (savedGender) setUserGender(savedGender)
 
-    // Animation delay
+    // Retraso de animación
     setTimeout(() => {
       setIsLoaded(true)
     }, 300)
 
-    // Registra visualização da etapa do quiz
+    // Registra visualización de la etapa del cuestionario
     enviarEvento('visualizou_etapa_quiz', {
       numero_etapa: step,
       pergunta: currentStep?.question || `Etapa ${step}`
     });
 
-    // Auto advance for expert step
+    // Avance automático para el paso de experto
     if (currentStep?.autoAdvance) {
       const timer = setTimeout(() => {
         proceedToNextStep()
@@ -87,7 +87,7 @@ export default function QuizStep() {
       return () => clearTimeout(timer)
     }
 
-    // Simulate people counter
+    // Simular contador de personas
     const interval = setInterval(() => {
       setPeopleCount((prev) => prev + Math.floor(Math.random() * 3))
     }, 45000)
@@ -98,20 +98,20 @@ export default function QuizStep() {
   const handleAnswerSelect = (answer: string) => {
     setSelectedAnswer(answer)
 
-    // Registra evento de resposta selecionada
+    // Registra evento de respuesta seleccionada
     enviarEvento('selecionou_resposta', {
       numero_etapa: step,
       pergunta: currentStep?.question || `Etapa ${step}`,
       resposta: answer
     });
 
-    // Save gender selection on first step
+    // Guardar selección de género en el primer paso
     if (step === 1) {
       setUserGender(answer)
       localStorage.setItem("userGender", answer)
     }
 
-    // Feedback visual imediato
+    // Retroalimentación visual inmediata
     const button = document.querySelector(`button[data-option="${answer}"]`)
     if (button) {
       button.classList.add("scale-105")
@@ -120,19 +120,19 @@ export default function QuizStep() {
   }
 
   const handleNext = () => {
-    // Registra evento de avanço para próxima etapa
+    // Registra evento de avance a la siguiente etapa
     enviarEvento('avancou_etapa', {
       numero_etapa: step,
       pergunta: currentStep?.question || `Etapa ${step}`,
       resposta_selecionada: selectedAnswer
     });
 
-    // Save answer
+    // Guardar respuesta
     const newQuizData = { ...quizData, [step]: selectedAnswer }
     setQuizData(newQuizData)
     localStorage.setItem("quizData", JSON.stringify(newQuizData))
 
-    // Show analysis for certain steps
+    // Mostrar análisis para ciertos pasos
     if (currentStep?.elements?.analysisText || currentStep?.elements?.profileAnalysis) {
       setShowAnalysis(true)
       setTimeout(() => {
@@ -146,9 +146,9 @@ export default function QuizStep() {
   }
 
   const proceedToNextStep = () => {
-    // Check for bonus unlock
+    // Verificar desbloqueo de bonificación
     if (currentStep?.bonusUnlock && !unlockedBonuses.includes(currentStep.bonusUnlock.id)) {
-      // Registra evento de desbloqueio de bônus
+      // Registra evento de desbloqueo de bonificación
       enviarEvento('desbloqueou_bonus', {
         numero_etapa: step,
         bonus_id: currentStep.bonusUnlock.id,
@@ -161,7 +161,7 @@ export default function QuizStep() {
       setUnlockedBonuses(newUnlockedBonuses)
       setTotalValue(newTotalValue)
 
-      // Personalizar bônus baseado no gênero
+      // Personalizar bonificación basada en el género
       const personalizedBonus = {
         ...currentStep.bonusUnlock,
         title: getPersonalizedContent(currentStep.bonusUnlock.title, userGender),
@@ -176,11 +176,11 @@ export default function QuizStep() {
       return
     }
 
-    // Navigate to next step
+    // Navegar al siguiente paso
     if (step < 14) {
       router.push(`/quiz/${step + 1}`)
     } else {
-      // Registra evento de conclusão do quiz
+      // Registra evento de finalización del cuestionario
       enviarEvento('concluiu_quiz', {
         total_etapas_completadas: 14,
         total_bonus_desbloqueados: unlockedBonuses.length
@@ -200,7 +200,7 @@ export default function QuizStep() {
   }
 
   const handleBack = () => {
-    // Registra evento de retorno para etapa anterior
+    // Registra evento de retorno a la etapa anterior
     enviarEvento('retornou_etapa', {
       de_etapa: step,
       para_etapa: step > 1 ? step - 1 : 'inicio'
@@ -215,15 +215,15 @@ export default function QuizStep() {
 
   const getStepIcon = (stepNumber: number, index: number) => {
     const iconMaps = {
-      1: [User, Users], // Gênero
-      2: [Calendar, TrendingUp, Target, Zap], // Idade
-      3: [Clock, Calendar, MessageCircle, Heart], // Tempo separados
-      4: [Heart, MessageCircle, Users], // Como foi a separação
-      5: [Calendar, Heart, TrendingUp, Clock], // Tempo juntos
+      1: [User, Users], // Género
+      2: [Calendar, TrendingUp, Target, Zap], // Edad
+      3: [Clock, Calendar, MessageCircle, Heart], // Tiempo separados
+      4: [Heart, MessageCircle, Users], // Cómo fue la separación
+      5: [Calendar, Heart, TrendingUp, Clock], // Tiempo juntos
       6: [Smile, Heart, MessageCircle, TrendingUp, Target, Zap], // Parte dolorosa
-      7: [MessageCircle, Heart, Users, TrendingUp, Smile, Users, Heart], // Situação atual
-      8: [MessageCircle, Heart, Users, TrendingUp, Smile], // Ela está com outra pessoa
-      9: [Heart, TrendingUp, Target, Zap], // Nível de comprometimento
+      7: [MessageCircle, Heart, Users, TrendingUp, Smile, Users, Heart], // Situación actual
+      8: [MessageCircle, Heart, Users, TrendingUp, Smile], // Ella está con otra persona
+      9: [Heart, TrendingUp, Target, Zap], // Nivel de compromiso
     }
 
     const icons = iconMaps[stepNumber] || [Heart]
@@ -231,7 +231,7 @@ export default function QuizStep() {
     return <Icon className="w-6 h-6" />
   }
 
-  // Get personalized content based on gender
+  // Obtener contenido personalizado basado en el género
   const getPersonalizedQuestion = () => {
     return getPersonalizedContent(currentStep.question, userGender)
   }
@@ -244,7 +244,7 @@ export default function QuizStep() {
   if (!currentStep) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 flex items-center justify-center">
-        <div className="text-white text-xl">Carregando...</div>
+        <div className="text-white text-xl">Cargando...</div>
       </div>
     )
   }
@@ -252,7 +252,7 @@ export default function QuizStep() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-slate-900 p-4">
       <div className="max-w-4xl mx-auto">
-        {/* Header with progress */}
+        {/* Encabezado con progreso */}
         <div className="mb-8">
           <div className="flex items-center justify-between mb-4">
             <Button
@@ -262,7 +262,7 @@ export default function QuizStep() {
               disabled={currentStep?.autoAdvance}
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
-              Voltar
+              Volver
             </Button>
 
             <div className="flex items-center gap-4">
@@ -282,22 +282,22 @@ export default function QuizStep() {
 
           <div className="flex justify-between items-center">
             <p className="text-white text-sm">
-              Etapa {step} de 14 • {Math.round(progress)}% concluído
+              Etapa {step} de 14 • {Math.round(progress)}% completado
             </p>
             {currentStep?.elements?.profileComplete && (
               <p className="text-green-400 text-sm font-semibold">
-                Análise de perfil: {currentStep.elements.profileComplete} completa
+                Análisis de perfil: {currentStep.elements.profileComplete} completo
               </p>
             )}
           </div>
         </div>
 
-        {/* Testimonial Image - Aparece na etapa 7 ou 12 */}
+        {/* Imagen de Testimonio - Aparece en la etapa 7 o 12 */}
         {(step === 7 || step === 12) && currentStep?.elements?.testimonialImage && (
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
             <Card className="bg-gradient-to-br from-blue-50 to-indigo-100 border-2 border-blue-300 shadow-lg">
               <CardContent className="p-6 text-center">
-                <h3 className="text-xl font-bold text-blue-800 mb-4">💬 DEPOIMENTO REAL</h3>
+                <h3 className="text-xl font-bold text-blue-800 mb-4">💬 TESTIMONIO REAL</h3>
                 <motion.div
                   animate={{
                     y: [0, -8, 0],
@@ -313,28 +313,28 @@ export default function QuizStep() {
                   {currentStep.elements.testimonialImage ? (
                     <img
                       src={currentStep.elements.testimonialImage || "/placeholder.svg"}
-                      alt="Depoimento de Cliente"
+                      alt="Testimonio de Cliente"
                       className="w-full h-auto object-cover"
                     />
                   ) : (
                     <div className="w-full h-48 bg-gray-200 rounded-lg flex items-center justify-center">
                       <div className="text-center">
                         <Star className="w-12 h-12 text-gray-400 mx-auto mb-2" />
-                        <p className="text-gray-500 font-semibold">ESPAÇO PARA DEPOIMENTO</p>
-                        <p className="text-gray-400 text-sm">Insira o link da imagem aqui</p>
+                        <p className="text-gray-500 font-semibold">ESPACIO PARA TESTIMONIO</p>
+                        <p className="text-gray-400 text-sm">Inserte el enlace de la imagen aquí</p>
                       </div>
                     </div>
                   )}
                 </motion.div>
                 <p className="text-blue-700 font-medium">
-                  Veja o que nossos clientes estão dizendo sobre os resultados!
+                  ¡Vea lo que nuestros clientes están diciendo sobre los resultados!
                 </p>
               </CardContent>
             </Card>
           </motion.div>
         )}
 
-        {/* Question Card */}
+        {/* Tarjeta de Pregunta */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
@@ -342,7 +342,7 @@ export default function QuizStep() {
         >
           <Card className="bg-gradient-to-br from-gray-900/95 to-black/95 backdrop-blur-lg border-orange-500/30 shadow-2xl border-2">
             <CardContent className="p-8">
-              {/* Heart animation for step 1 */}
+              {/* Animación de corazón para el paso 1 */}
               {step === 1 && currentStep?.elements?.heartbeat && (
                 <motion.div
                   initial={{ y: -20 }}
@@ -365,7 +365,7 @@ export default function QuizStep() {
                 </motion.div>
               )}
 
-              {/* Expert auto-advance step */}
+              {/* Paso de avance automático de experto */}
               {currentStep?.autoAdvance && (
                 <motion.div
                   initial={{ opacity: 0, scale: 0.8 }}
@@ -375,7 +375,7 @@ export default function QuizStep() {
                   {currentStep?.elements?.expertImage ? (
                     <motion.img
                       src={currentStep.elements.expertImage}
-                      alt="Expert em Reconquista"
+                      alt="Experto en Reconquista"
                       className="w-24 h-24 rounded-full object-cover border-4 border-blue-600 mx-auto mb-6"
                       animate={{
                         y: [0, -8, 0],
@@ -423,7 +423,7 @@ export default function QuizStep() {
                 </motion.div>
               )}
 
-              {/* Big number display for step 12 */}
+              {/* Visualización de número grande para el paso 12 */}
               {currentStep?.elements?.bigNumber && (
                 <motion.div
                   initial={{ scale: 0 }}
@@ -435,13 +435,13 @@ export default function QuizStep() {
                 </motion.div>
               )}
 
-              {/* Expert photo for step 11 */}
+              {/* Foto de experto para el paso 11 */}
               {currentStep?.elements?.expertPhoto && !currentStep?.autoAdvance && (
                 <div className="flex justify-center mb-6">
                   {currentStep?.elements?.expertImage ? (
                     <motion.img
                       src={currentStep.elements.expertImage}
-                      alt="Expert em Reconquista"
+                      alt="Experto en Reconquista"
                       className="w-20 h-20 rounded-full object-cover border-4 border-blue-600"
                       animate={{
                         y: [0, -6, 0],
@@ -461,7 +461,7 @@ export default function QuizStep() {
                 </div>
               )}
 
-              {/* Compatibility calculation for step 11 */}
+              {/* Cálculo de compatibilidad para el paso 11 */}
               {currentStep?.elements?.compatibilityCalc && (
                 <motion.div
                   initial={{ width: 0 }}
@@ -471,7 +471,7 @@ export default function QuizStep() {
                 >
                   <div className="bg-green-100 border border-green-300 rounded-lg p-4 text-center">
                     <div className="text-3xl font-bold text-green-700">
-                      {currentStep.elements.compatibilityCalc} de compatibilidade
+                      {currentStep.elements.compatibilityCalc} de compatibilidad
                     </div>
                   </div>
                 </motion.div>
@@ -491,12 +491,12 @@ export default function QuizStep() {
                     <p className="text-gray-300 text-center mb-8">{currentStep.description}</p>
                   )}
 
-                  {/* Thermometer for commitment level */}
+                  {/* Termómetro para nivel de compromiso */}
                   {currentStep?.elements?.thermometer && (
                     <div className="mb-8">
                       <div className="flex justify-between text-gray-300 text-sm mb-2 font-medium">
-                        <span>Não tenho certeza</span>
-                        <span>Quero muito</span>
+                        <span>No estoy seguro</span>
+                        <span>Lo quiero mucho</span>
                       </div>
                       <div className="bg-gray-200 rounded-full h-4 mb-4">
                         <motion.div
@@ -529,7 +529,7 @@ export default function QuizStep() {
                             }`}
                           >
                             <div className="flex items-center w-full">
-                              {/* Icons for different steps */}
+                              {/* Iconos para diferentes pasos */}
                               <div className={`mr-4 ${selectedAnswer === option ? "text-white" : "text-orange-600"}`}>
                                 {getStepIcon(step, index)}
                               </div>
@@ -545,7 +545,7 @@ export default function QuizStep() {
                             </div>
                           </button>
 
-                          {/* Pulse effect for buttons */}
+                          {/* Efecto de pulso para botones */}
                           {!selectedAnswer && (
                             <motion.div
                               className="absolute inset-0 rounded-lg border-2 border-orange-400/50 pointer-events-none"
@@ -594,13 +594,13 @@ export default function QuizStep() {
                       animate={{ opacity: 1, y: 0 }}
                       className="mt-8 text-center"
                     >
-                      {/* Botão com texto reduzido */}
+                      {/* Botón con texto reducido */}
                       <Button
                         onClick={handleNext}
                         size="lg"
                         className="bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white font-bold py-4 px-6 rounded-full shadow-lg max-w-full"
                       >
-                        {step === 14 ? "Ver Resultado" : "Próxima Pergunta"}
+                        {step === 14 ? "Ver Resultado" : "Siguiente Pregunta"}
                         <ArrowRight className="w-5 h-5 ml-2" />
                       </Button>
                     </motion.div>
@@ -611,14 +611,14 @@ export default function QuizStep() {
           </Card>
         </motion.div>
 
-        {/* Unlocked Bonuses Display */}
+        {/* Visualización de Bonificaciones Desbloqueadas */}
         {unlockedBonuses.length > 0 && (
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
             <Card className="bg-gradient-to-r from-green-100 to-emerald-100 border-green-300 shadow-lg">
               <CardContent className="p-6">
                 <div className="flex items-center justify-center gap-2 mb-4">
                   <Gift className="w-6 h-6 text-green-700" />
-                  <h3 className="text-xl font-bold text-green-800">Bônus Desbloqueados</h3>
+                  <h3 className="text-xl font-bold text-green-800">Bonificaciones Desbloqueadas</h3>
                 </div>
                 <div className="flex flex-wrap justify-center gap-2">
                   {unlockedBonuses.map((bonusId) => (
@@ -626,7 +626,7 @@ export default function QuizStep() {
                       key={bonusId}
                       className="bg-green-200 text-green-800 px-3 py-1 rounded-full text-sm font-semibold"
                     >
-                      Bônus #{bonusId}
+                      Bono #{bonusId}
                     </div>
                   ))}
                 </div>
@@ -635,7 +635,7 @@ export default function QuizStep() {
           </motion.div>
         )}
 
-        {/* Social Proof */}
+        {/* Prueba Social */}
         {step > 2 && !currentStep?.autoAdvance && (
           <motion.div
             initial={{ opacity: 0 }}
@@ -664,21 +664,21 @@ export default function QuizStep() {
         )}
       </div>
 
-      {/* Loading Analysis Modal */}
+      {/* Modal de Análisis de Carga */}
       <AnimatePresence>
         {showAnalysis && (
           <LoadingAnalysis
             message={
               currentStep?.elements?.analysisText ||
               currentStep?.elements?.profileAnalysis ||
-              "Analisando suas respostas..."
+              "Analizando tus respuestas..."
             }
             successMessage={currentStep?.elements?.successRate}
           />
         )}
       </AnimatePresence>
 
-      {/* Bonus Unlock Modal */}
+      {/* Modal de Desbloqueo de Bonificación */}
       <AnimatePresence>
         {showBonusUnlock && newBonus && <BonusUnlock bonus={newBonus} onComplete={handleBonusUnlockComplete} />}
       </AnimatePresence>
