@@ -49,7 +49,7 @@ export const quizSteps = [
     bonusUnlock: {
       id: 1,
       title: "GUÍA RÁPIDA: 5 ERRORES FATALES QUE IMPIDEN LA RECONQUISTA",
-      value: 97,
+      value: 37,
       description: "Manual completo para evitar los errores que el 97% de las personas cometen al intentar reconquistar a su ex",
     },
   },
@@ -93,7 +93,7 @@ export const quizSteps = [
         masculino: "CÓMO HACER QUE ELLA TE EXTRAÑE EN 72 HORAS",
         feminino: "CÓMO HACER QUE ÉL TE EXTRAÑE EN 72 HORAS",
       },
-      value: 147,
+      value: 27,
       description: "Cronograma hora por hora para los 3 días críticos que determinan el éxito de tu reconquista",
     },
   },
@@ -182,7 +182,7 @@ export const quizSteps = [
     bonusUnlock: {
       id: 3,
       title: "CÓDIGO DE LA ATRACCIÓN: LOS 7 PILARES DE LA PRESENCIA IRRESISTIBLE",
-      value: 167,
+      value: 29,
       description: {
         masculino:
           "Transfórmate en el hombre al que ella no puede resistirse, desarrollando los 7 fundamentos de la atracción auténtica",
@@ -207,7 +207,7 @@ export const quizSteps = [
     bonusUnlock: {
       id: 4,
       title: "101 TEXTOS LISTOS PARA RECONQUISTAR",
-      value: 127,
+      value: 24,
       description: "Biblioteca completa de mensajes probados y aprobados para cada fase de la reconquista",
     },
     elements: {
@@ -256,7 +256,7 @@ export const quizSteps = [
         masculino: "CÓMO IDENTIFICAR SI ELLA TODAVÍA TIENE SENTIMIENTOS POR TI",
         feminino: "CÓMO IDENTIFICAR SI ÉL TODAVÍA TIENE SENTIMIENTOS POR TI",
       },
-      value: 97,
+      value: 17,
       description: "15 señales inconfundibles que revelan si existe una oportunidad real de reconquista",
     },
     elements: {
