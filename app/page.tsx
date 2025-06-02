@@ -7,10 +7,10 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 
 // 1. Adicione esta função para enviar eventos ao Google Analytics
-function enviarEvento(nome_evento, propriedades = {}) {
+function enviarEvento(nombre_evento, propriedades = {}) {
   if (typeof window !== 'undefined' && window.gtag) {
-    window.gtag('event', nome_evento, propriedades);
-    console.log('Evento enviado:', nome_evento, propriedades);
+    window.gtag('event', nombre_evento, propriedades);
+    console.log('Evento enviado:', nombre_evento, propriedades);
   }
 }
 
@@ -111,41 +111,41 @@ export default function HomePage() {
               className="mb-10"
             >
               <h3 className="text-2xl md:text-3xl font-bold text-red-400 mb-6 leading-tight">
-                ELE(A) ESTÁ PRESTES A SEGUIR EM FRENTE...
+                ÉL/ELLA ESTÁ A PUNTO DE SEGUIR ADELANTE...
                 <br />
-                <span className="text-white">VOCÊ VAI DEIXAR ISSO ACONTECER?</span>
+                <span className="text-white">¿VAS A DEJAR QUE ESO SUCEDA?</span>
               </h3>
 
               <div className="bg-red-50 border-l-4 border-red-500 p-6 mb-8">
                 <p className="text-lg text-red-800 font-semibold mb-2">
-                  ⚠️ CADA DIA QUE PASSA, ELE(A) SE AFASTA MAIS DE VOCÊ
+                  ⚠️ CADA DÍA QUE PASA, ÉL/ELLA SE ALEJA MÁS DE TI
                 </p>
                 <p className="text-red-700">
-                  Enquanto você hesita, outras pessoas estão conquistando a atenção dele(a). O tempo está contra você!
+                  Mientras dudas, otras personas están ganando su atención. ¡El tiempo está en tu contra!
                 </p>
               </div>
 
               <div className="bg-green-50 border border-green-300 rounded-lg p-6 mb-8">
                 <h4 className="text-xl font-bold text-green-800 mb-3">
-                  ✅ DESCUBRA AGORA SE AINDA HÁ CHANCE DE RECONQUISTÁ-LO(A)
+                  ✅ DESCUBRE AHORA SI AÚN HAY CHANCE DE RECUPERARLO(A)
                 </h4>
                 <p className="text-green-700 text-lg">
-                  Teste rápido de 2 minutos revela se seu caso tem solução e qual estratégia usar
+                  Prueba rápida de 2 minutos revela si tu caso tiene solución y qué estrategia usar
                 </p>
               </div>
 
               <div className="flex justify-center items-center gap-6 mb-8">
                 <div className="text-center">
                   <div className="text-3xl font-bold text-blue-400">{urgencyCount}</div>
-                  <div className="text-sm text-gray-300">pessoas fizeram hoje</div>
+                  <div className="text-sm text-gray-300">personas lo hicieron hoy</div>
                 </div>
                 <div className="text-center">
                   <div className="text-3xl font-bold text-green-400">91%</div>
-                  <div className="text-sm text-gray-300">taxa de sucesso</div>
+                  <div className="text-sm text-gray-300">tasa de éxito</div>
                 </div>
                 <div className="text-center">
                   <div className="text-3xl font-bold text-orange-400">21</div>
-                  <div className="text-sm text-gray-300">dias ou menos</div>
+                  <div className="text-sm text-gray-300">días o menos</div>
                 </div>
               </div>
             </motion.div>
@@ -171,21 +171,21 @@ export default function HomePage() {
                   size="lg"
                   className="bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white font-bold py-5 px-6 sm:px-8 rounded-full text-lg sm:text-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 mb-4 w-full sm:w-auto"
                 >
-                  FAZER TESTE GRÁTIS
+                  HACER PRUEBA GRATIS
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </Button>
               </motion.div>
 
               <div className="flex items-center justify-center gap-2 text-red-400 mb-4">
                 <Clock className="w-5 h-5" />
-                <p className="text-sm font-semibold text-white">⏰ Apenas 2 minutos • Resultado imediato</p>
+                <p className="text-sm font-semibold text-white">⏰ Solo 2 minutos • Resultado inmediato</p>
               </div>
 
               <div className="bg-yellow-50 border border-yellow-300 rounded-lg p-4">
                 <div className="flex items-center justify-center gap-2 text-amber-800">
                   <Users className="w-5 h-5" />
                   <p className="text-sm font-bold">
-                    🔥 ATENÇÃO: Mais de 200 pessoas fazem este teste por dia. Não perca sua chance!
+                    🔥 ATENCIÓN: Más de 200 personas hacen esta prueba por día. ¡No pierdas tu oportunidad!
                   </p>
                 </div>
               </div>
