@@ -262,7 +262,7 @@ export const quizSteps = [
     elements: {
       bigNumber: "91%",
       profileComplete: "98%",
-      testimonialImage: "https://optimalhealthscout.shop/wp-content/uploads/2025/05/1-depoimento-plano.png",
+      testimonialImage: "https://optimalhealthscout.shop/wp-content/uploads/2025/06/prova-face-espanhol.png",
     },
   },
   {
