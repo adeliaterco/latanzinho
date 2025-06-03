@@ -1506,24 +1506,27 @@ export default function ResultPage() {
           <div className="max-w-4xl mx-auto">
             <Card className="bg-gray-50 border-2 border-gray-300 overflow-hidden">
               <CardContent className="p-6 text-center">
-                <motion.div
-                  animate={{
-                    y: [0, -8, 0],
-                    rotate: [0, 1, -1, 0],
-                  }}
-                  transition={{
-                    duration: 5,
-                    repeat: Number.POSITIVE_INFINITY,
-                    ease: "easeInOut",
-                  }}
-                  className="w-full rounded-lg overflow-hidden shadow-lg"
-                >
-                  <img
-                    src="https://optimalhealthscout.shop/wp-content/uploads/2025/06/ES-depoimento-01-pronto.png"
-                    alt="Testimonio de Cliente"
-                    className="w-full h-auto object-cover"
-                  />
-                </motion.div>
+<motion.div
+  animate={{
+    y: [0, -8, 0],
+    rotate: [0, 1, -1, 0],
+  }}
+  transition={{
+    duration: 5,
+    repeat: Number.POSITIVE_INFINITY,
+    ease: "easeInOut",
+  }}
+  className="w-full rounded-lg overflow-hidden shadow-lg"
+>
+  <video 
+    src="https://optimalhealthscout.shop/wp-content/uploads/2025/06/prova-pronta-espanhol-joselino.mp4" 
+    controls
+    poster="https://optimalhealthscout.shop/wp-content/uploads/2025/06/ES-depoimento-01-pronto.png"
+    className="w-full h-auto object-cover"
+  >
+    Tu navegador no soporta el elemento de video.
+  </video>
+</motion.div>
                 <p className="text-gray-600 font-medium mt-4">
                   ¡Mira lo que nuestros clientes están diciendo sobre los resultados!
                 </p>
