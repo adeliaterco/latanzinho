@@ -834,9 +834,9 @@ export default function ResultPage() {
           <div className="max-w-4xl mx-auto">
             <Tabs defaultValue="traicion" className="w-full">
               <TabsList className="grid grid-cols-3 mb-6">
-                <TabsTrigger value="traicion" className="text-sm md:text-base">Después de Traición</TabsTrigger>
-                <TabsTrigger value="desgaste" className="text-sm md:text-base">Después de Desgaste</TabsTrigger>
-                <TabsTrigger value="peleas" className="text-sm md:text-base">Después de Peleas</TabsTrigger>
+                <TabsTrigger value="traicion" className="text-sm md:text-base">Después Traición</TabsTrigger>
+                <TabsTrigger value="desgaste" className="text-sm md:text-base">Después Desgaste</TabsTrigger>
+                <TabsTrigger value="peleas" className="text-sm md:text-base">Después Peleas</TabsTrigger>
               </TabsList>
               
               <TabsContent value="traicion">
