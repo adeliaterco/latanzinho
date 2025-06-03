@@ -1319,7 +1319,7 @@ export default function ResultPage() {
                 <h3 className="text-2xl md:text-3xl font-bold">LA OFERTA EXPIRA EN:</h3>
               </div>
               <CountdownTimer />
-              <p className="text-xl font-bold mt-4 text-yellow-300">¡Después de eso, vuelve al precio normal de $145!</p>
+              <p className="text-xl font-bold mt-4 text-yellow-300">¡Después de eso, vuelve al precio normal de $197!</p>
             </CardContent>
           </Card>
         </motion.div>
