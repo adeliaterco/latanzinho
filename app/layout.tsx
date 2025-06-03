@@ -37,7 +37,7 @@ export default function RootLayout({
         <script
           dangerouslySetInnerHTML={{
             __html: `
-              window.pixelId = "68393272757eb1eb30134e2d";
+              window.pixelId = "683e4507be02a8b1bece6041";
               var a = document.createElement("script");
               a.setAttribute("async", "");
               a.setAttribute("defer", "");
