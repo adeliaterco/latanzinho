@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ["latin"] })
 export const metadata: Metadata = {
   title: "Plano A - Reconquista Rápida",
   description: "O sistema completo para reconquistar seu amor perdido em 21 dias ou menos",
-    generator: 'v0.dev'
+  generator: 'v0.dev'
 }
 
 export default function RootLayout({
@@ -27,7 +27,6 @@ export default function RootLayout({
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-
               gtag('config', 'G-KBSLRJ2FJF');
             `,
           }}
@@ -54,7 +53,7 @@ export default function RootLayout({
           data-utmify-prevent-subids
           async
           defer
-        />
+        ></script>
       </head>
       <body className={inter.className}>{children}</body>
     </html>
