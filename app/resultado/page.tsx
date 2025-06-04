@@ -809,7 +809,7 @@ export default function ResultPage() {
                 <tr className="bg-gradient-to-r from-orange-900/30 to-orange-800/30">
                   <td className="p-4 text-orange-400 font-bold">PLAN A - RECONQUISTA RÁPIDA</td>
                   <td className="p-4 text-center text-orange-300 font-bold">21 días</td>
-                  <td className="p-4 text-center text-orange-300 font-bold">$18</td>
+                  <td className="p-4 text-center text-orange-300 font-bold">$9</td>
                   <td className="p-4 text-center text-orange-300 font-bold">87-97%</td>
                   <td className="p-4 text-center text-green-400">✅</td>
                 </tr>
