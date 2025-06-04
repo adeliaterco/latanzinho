@@ -1052,277 +1052,164 @@ export default function ResultPage() {
           </div>
         </motion.div>
 
-        {/* Oferta Principal */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: isLoaded ? 1 : 0, scale: isLoaded ? 1 : 0.9 }}
-          transition={{ delay: 0.2 }}
-          id="oferta"
-          className="mb-12"
-        >
-          <Card className="bg-gradient-to-r from-red-600 to-orange-600 text-white shadow-2xl border-4 border-yellow-400">
-            <CardContent className="p-8 text-center">
-              <div className="bg-yellow-400 text-black font-bold py-2 px-6 rounded-full inline-block mb-6">
-                🔥 OFERTA LIMITADA - SOLO HOY
-              </div>
+{/* Oferta Principal Consolidada */}
+<motion.div
+  initial={{ opacity: 0, scale: 0.9 }}
+  animate={{ opacity: isLoaded ? 1 : 0, scale: isLoaded ? 1 : 0.9 }}
+  transition={{ delay: 0.2 }}
+  id="oferta"
+  className="mb-12"
+>
+  <Card className="bg-gradient-to-r from-red-600 to-orange-600 text-white shadow-2xl border-4 border-yellow-400">
+    <CardContent className="p-8 text-center">
+      <div className="bg-yellow-400 text-black font-bold py-2 px-6 rounded-full inline-block mb-6">
+        🔥 OFERTA LIMITADA - SOLO HOY
+      </div>
 
-              <h3 className="text-3xl md:text-5xl font-bold mb-4">PLAN A - RECONQUISTA RÁPIDA</h3>
+      <h3 className="text-3xl md:text-5xl font-bold mb-4">PLAN A - RECONQUISTA RÁPIDA</h3>
 
-              <p className="text-xl md:text-2xl mb-6 font-semibold">
-                El Sistema Completo que Ya Reconquistó Más de 3.847 Relaciones
-              </p>
+      <p className="text-xl md:text-2xl mb-6 font-semibold">
+        El Sistema Completo que Ya Reconquistó Más de 3.847 Relaciones
+      </p>
 
-              <div className="bg-white/20 rounded-lg p-6 mb-6">
-                <div className="grid md:grid-cols-3 gap-4 text-center">
-                  <div>
-                    <div className="text-3xl font-bold text-yellow-300">21 DÍAS</div>
-                    <div className="text-sm">Plazo máximo</div>
-                  </div>
-                  <div>
-                    <div className="text-3xl font-bold text-yellow-300">97%</div>
-                    <div className="text-sm">Tasa de éxito</div>
-                  </div>
-                  <div>
-                    <div className="text-3xl font-bold text-yellow-300">3.847</div>
-                    <div className="text-sm">Personas ayudadas</div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Botón de Compra en la Oferta - Personalizado */}
-              <motion.div
-                animate={{
-                  scale: [1, 1.05, 1],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Number.POSITIVE_INFINITY,
-                  repeatType: "reverse",
-                }}
-              >
-                <Button
-                  onClick={handlePurchase}
-                  size="lg"
-                  className="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-4 px-6 rounded-full text-lg sm:text-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 mb-4 w-full sm:w-auto"
-                >
-                  {getPersonalizedCTA()}
-                  <ArrowRight className="w-5 h-5 ml-2" />
-                </Button>
-              </motion.div>
-              <p className="text-yellow-200 text-sm">✅ Acceso inmediato • 💳 Financiamiento disponible</p>
-            </CardContent>
-          </Card>
-        </motion.div>
-
-        {/* LO QUE VAS A RECIBIR - MÓDULO ÚNICO */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
-          transition={{ delay: 0.3 }}
-          className="mb-12"
-        >
-          <h3 className="text-3xl font-bold text-white text-center mb-8">LO QUE VAS A RECIBIR:</h3>
-
-          <div className="max-w-4xl mx-auto">
-            <Card className="bg-gradient-to-br from-gray-900 to-black border-2 border-orange-500 shadow-2xl">
-              <CardContent className="p-8">
-                <div className="flex items-center mb-6">
-                  <div className="w-20 h-20 bg-gradient-to-br from-orange-500 to-red-600 rounded-full flex items-center justify-center mr-6">
-                    <BookOpen className="w-10 h-10 text-white" />
-                  </div>
-                  <div>
-                    <h4 className="text-3xl font-bold text-orange-400">PLAN A - RECONQUISTA RÁPIDA</h4>
-                    <p className="text-orange-300 font-semibold text-lg">Sistema Completo de Reconquista</p>
-                  </div>
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <h5 className="text-xl font-bold text-orange-200 mb-4">📚 CONTENIDO PRINCIPAL:</h5>
-                    <ul className="space-y-3 text-gray-300">
-                      <li className="flex items-center">
-                        <Check className="w-5 h-5 text-green-400 mr-3" />
-                        <span>✅ Sistema completo de 21 días paso a paso</span>
-                      </li>
-                      <li className="flex items-center">
-                        <Check className="w-5 h-5 text-green-400 mr-3" />
-                        <span>✅ 7 Pilares de la Presencia Irresistible</span>
-                      </li>
-                      <li className="flex items-center">
-                        <Check className="w-5 h-5 text-green-400 mr-3" />
-                        <span>✅ 21 Gatillos Emocionales Infalibles</span>
-                      </li>
-                      <li className="flex items-center">
-                        <Check className="w-5 h-5 text-green-400 mr-3" />
-                        <span>✅ Protocolo de 72 horas para casos urgentes</span>
-                      </li>
-                      <li className="flex items-center">
-                        <Check className="w-5 h-5 text-green-400 mr-3" />
-                        <span>✅ Estrategias para cada tipo de ruptura</span>
-                      </li>
-                      <li className="flex items-center">
-                        <Check className="w-5 h-5 text-green-400 mr-3" />
-                        <span>✅ Cómo salir de la friendzone definitivamente</span>
-                      </li>
-                    </ul>
-                  </div>
-
-                  <div>
-                    <h5 className="text-xl font-bold text-orange-200 mb-4">🎯 INCLUYE TAMBIÉN:</h5>
-                    <ul className="space-y-3 text-gray-300">
-                      <li className="flex items-center">
-                        <Check className="w-5 h-5 text-green-400 mr-3" />
-                        <span>📱 Acceso por celular, tablet o computadora</span>
-                      </li>
-                      <li className="flex items-center">
-                        <Check className="w-5 h-5 text-green-400 mr-3" />
-                        <span>✅ Actualizaciones gratuitas de por vida</span>
-                      </li>
-                      <li className="flex items-center">
-                        <Check className="w-5 h-5 text-green-400 mr-3" />
-                        <span>✅ Soporte prioritario por 30 días</span>
-                      </li>
-                      <li className="flex items-center">
-                        <Check className="w-5 h-5 text-green-400 mr-3" />
-                        <span>✅ Comunidad privada de apoyo</span>
-                      </li>
-                      <li className="flex items-center">
-                        <Check className="w-5 h-5 text-green-400 mr-3" />
-                        <span>✅ Scripts de mensajes listos para usar</span>
-                      </li>
-                      <li className="flex items-center">
-                        <Check className="w-5 h-5 text-green-400 mr-3" />
-                        <span>✅ Herramientas de seguimiento de progreso</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div className="mt-8 text-center">
-                  <div className="text-4xl font-bold text-orange-400">VALOR TOTAL: $197</div>
-                </div>
-              </CardContent>
-            </Card>
+      {/* Conteúdo Principal - Consolidado */}
+      <div className="bg-white/20 rounded-lg p-6 mb-6">
+        <h4 className="text-2xl font-bold text-yellow-300 mb-4">LO QUE RECIBES:</h4>
+        
+        <div className="grid md:grid-cols-2 gap-6 text-left mb-6">
+          <div>
+            <h5 className="text-xl font-bold text-yellow-200 mb-3">📚 CONTENIDO PRINCIPAL:</h5>
+            <ul className="space-y-2 text-white">
+              <li className="flex items-start">
+                <Check className="w-5 h-5 text-green-400 mr-2 mt-1 flex-shrink-0" />
+                <span>Sistema completo de 21 días paso a paso</span>
+              </li>
+              <li className="flex items-start">
+                <Check className="w-5 h-5 text-green-400 mr-2 mt-1 flex-shrink-0" />
+                <span>7 Pilares de la Presencia Irresistible</span>
+              </li>
+              <li className="flex items-start">
+                <Check className="w-5 h-5 text-green-400 mr-2 mt-1 flex-shrink-0" />
+                <span>21 Disparadores Emocionales Infalibles</span>
+              </li>
+              <li className="flex items-start">
+                <Check className="w-5 h-5 text-green-400 mr-2 mt-1 flex-shrink-0" />
+                <span>Protocolo de 72 horas para casos urgentes</span>
+              </li>
+            </ul>
           </div>
-        </motion.div>
-
-        {/* Sección de Bonos */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
-          transition={{ delay: 0.4 }}
-          id="bonus"
-          className="mb-12"
-        >
-          <h3 className="text-3xl font-bold text-white text-center mb-2">+ 5 BONOS EXCLUSIVOS</h3>
-          <p className="text-orange-400 text-center font-semibold mb-8 text-xl">
-            (¡Desbloqueaste {unlockedBonuses.length} de 5 en el quiz!)
-          </p>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          
+          <div>
+            <h5 className="text-xl font-bold text-yellow-200 mb-3">🎯 SOPORTE Y ACCESO:</h5>
+            <ul className="space-y-2 text-white">
+              <li className="flex items-start">
+                <Check className="w-5 h-5 text-green-400 mr-2 mt-1 flex-shrink-0" />
+                <span>Acceso desde móvil, tablet o computadora</span>
+              </li>
+              <li className="flex items-start">
+                <Check className="w-5 h-5 text-green-400 mr-2 mt-1 flex-shrink-0" />
+                <span>Actualizaciones gratuitas de por vida</span>
+              </li>
+              <li className="flex items-start">
+                <Check className="w-5 h-5 text-green-400 mr-2 mt-1 flex-shrink-0" />
+                <span>Soporte prioritario por 30 días</span>
+              </li>
+              <li className="flex items-start">
+                <Check className="w-5 h-5 text-green-400 mr-2 mt-1 flex-shrink-0" />
+                <span>Comunidad privada de apoyo</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        
+        {/* Bônus Consolidados */}
+        <div className="text-left mb-6">
+          <h5 className="text-xl font-bold text-yellow-200 mb-3">🎁 BONOS EXCLUSIVOS DESBLOQUEADOS ({unlockedBonuses.length} de 5):</h5>
+          <div className="grid md:grid-cols-2 gap-3">
             {bonuses.map((bonus, index) => (
-              <motion.div
+              <div 
                 key={bonus.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 * index }}
+                className={`p-3 rounded-lg ${
+                  unlockedBonuses.includes(bonus.id)
+                    ? "bg-green-500/30 border border-green-400"
+                    : "bg-gray-700/30 border border-gray-600"
+                }`}
               >
-                <Card
-                  className={`h-full ${
-                    unlockedBonuses.includes(bonus.id)
-                      ? "bg-gradient-to-br from-green-50 to-emerald-100 border-2 border-green-400 shadow-lg"
-                      : "bg-gray-50 border border-gray-300"
-                  }`}
-                >
-                  <CardContent className="p-6 text-center">
-                    <div
-                      className={`w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 ${
-                        unlockedBonuses.includes(bonus.id) ? "bg-green-500" : "bg-gray-400"
-                      }`}
-                    >
-                      {unlockedBonuses.includes(bonus.id) ? (
-                        <Check className="w-8 h-8 text-white" />
-                      ) : (
-                        <Gift className="w-8 h-8 text-white" />
-                      )}
-                    </div>
-                    <h4 className="text-lg font-bold text-gray-900 mb-2">BONO #{bonus.id}</h4>
-                    <p className="text-sm text-gray-700 mb-3">{getPersonalizedContent(bonus.title, userGender)}</p>
-                    
-                    {/* Descripción expandida del bono */}
-                    <div className="bg-gray-100 p-3 rounded-lg mb-3 text-left text-sm text-gray-700">
-                      <p>{getPersonalizedContent(bonus.description || "Descripción detallada de este bono exclusivo que acelerará tu reconquista.", userGender)}</p>
-                    </div>
-                    
-                    <div className="text-2xl font-bold text-green-600">${bonus.value}</div>
-                  </CardContent>
-                </Card>
-              </motion.div>
+                <div className="flex items-start">
+                  {unlockedBonuses.includes(bonus.id) ? (
+                    <Check className="w-5 h-5 text-green-400 mr-2 mt-1 flex-shrink-0" />
+                  ) : (
+                    <Gift className="w-5 h-5 text-gray-400 mr-2 mt-1 flex-shrink-0" />
+                  )}
+                  <div>
+                    <span className="font-bold text-white">
+                      {getPersonalizedContent(bonus.title, userGender)}
+                    </span>
+                    <div className="text-sm text-yellow-200 mt-1">Valor: $ {bonus.value}</div>
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
-        </motion.div>
+        </div>
+      </div>
 
-        {/* Sección de Precio */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
-          transition={{ delay: 0.6 }}
-          className="mb-12"
+      {/* Preço Consolidado */}
+      <div className="mb-6">
+        <div className="text-red-300 text-xl font-bold mb-2">
+          <span className="line-through">VALOR TOTAL: $ 197</span>
+        </div>
+        <div className="text-6xl font-bold text-yellow-300 mb-2">$ 9</div>
+        
+        <div className="bg-yellow-500 text-black font-bold py-2 px-6 rounded-full inline-block mt-4">
+          💰 ¡AHORRO DE $ 188 HOY!
+        </div>
+      </div>
+
+      {/* CTA Unificado */}
+      <motion.div
+        animate={{
+          scale: [1, 1.05, 1],
+        }}
+        transition={{
+          duration: 2,
+          repeat: Number.POSITIVE_INFINITY,
+          repeatType: "reverse",
+        }}
+      >
+        <Button
+          onClick={handlePurchase}
+          size="lg"
+          className="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-4 px-6 rounded-full text-lg sm:text-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 mb-4 w-full sm:w-auto"
         >
-          <Card className="bg-gradient-to-br from-black to-gray-900 text-white shadow-2xl border-4 border-yellow-500">
-            <CardContent className="p-8 text-center">
-              <div className="mb-6">
-                <div className="text-red-400 text-2xl font-bold mb-2">
-                  <span className="line-through">VALOR TOTAL: $197</span>
-                </div>
-                <div className="text-6xl font-bold text-yellow-400 mb-2">$9</div>
-              </div>
-
-              <div className="bg-gradient-to-r from-yellow-500 to-orange-500 text-black font-bold py-3 px-6 rounded-lg inline-block mb-4">
-                💰 ¡AHORRO DE $188 HOY!
-              </div>
-
-              <p className="text-lg mb-6">¡Menos que el precio de un almuerzo en el centro comercial!</p>
-            </CardContent>
-          </Card>
-        </motion.div>
-
-        {/* CTA Adicional después del precio - Personalizado */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
-          transition={{ delay: 0.7 }}
-          className="mb-8 text-center"
-        >
-          <Button
-            onClick={handlePurchase}
-            size="lg"
-            className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-bold py-4 px-6 rounded-full text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 w-full sm:w-auto"
-          >
-            ASEGURAR CUPO
-            <ArrowRight className="w-5 h-5 ml-2" />
-          </Button>
-          <p className="text-gray-400 text-sm mt-2">Haz clic aquí para ir directo al checkout seguro</p>
-        </motion.div>
-
-        {/* Countdown Timer */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
-          transition={{ delay: 0.8 }}
-          className="mb-12"
-        >
-          <Card className="bg-red-600 text-white border-4 border-yellow-400">
-            <CardContent className="p-8 text-center">
-              <div className="flex items-center justify-center gap-2 mb-6">
-                <AlertTriangle className="w-8 h-8 text-yellow-300" />
-                <h3 className="text-2xl md:text-3xl font-bold">LA OFERTA EXPIRA EN:</h3>
-              </div>
-              <CountdownTimer />
-              <p className="text-xl font-bold mt-4 text-yellow-300">¡Después de eso, vuelve al precio normal de $197!</p>
-            </CardContent>
-          </Card>
-        </motion.div>
+          {getPersonalizedCTA()}
+          <ArrowRight className="w-5 h-5 ml-2" />
+        </Button>
+      </motion.div>
+      
+      <div className="flex justify-center gap-4 text-sm text-white">
+        <div className="flex items-center">
+          <Check className="w-4 h-4 text-green-400 mr-1" />
+          <span>Acceso inmediato</span>
+        </div>
+        <div className="flex items-center">
+          <Check className="w-4 h-4 text-green-400 mr-1" />
+          <span>Pago en cuotas disponible</span>
+        </div>
+        <div className="flex items-center">
+          <Check className="w-4 h-4 text-green-400 mr-1" />
+          <span>Garantía de 30 días</span>
+        </div>
+      </div>
+      
+      {recentBuyers > 0 && (
+        <div className="mt-4 bg-red-500 text-white py-2 px-4 rounded-full inline-block">
+          🔥 ¡{recentBuyers} personas compraron en las últimas 2 horas!
+        </div>
+      )}
+    </CardContent>
+  </Card>
+</motion.div>
 
         {/* Garantías */}
         <motion.div
@@ -1442,56 +1329,6 @@ export default function ResultPage() {
               </CardContent>
             </Card>
           </div>
-        </motion.div>
-
-        {/* CTA Final - Personalizado */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
-          transition={{ delay: 1.6 }}
-          className="mb-12 text-center"
-        >
-          <Card className="bg-gradient-to-r from-green-600 to-emerald-600 text-white shadow-2xl border-4 border-yellow-400">
-            <CardContent className="p-8 text-center">
-              <motion.div
-                animate={{
-                  scale: [1, 1.05, 1],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Number.POSITIVE_INFINITY,
-                  repeatType: "reverse",
-                }}
-              >
-                <Button
-                  onClick={handlePurchase}
-                  size="lg"
-                  className="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-5 px-8 rounded-full text-xl md:text-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 mb-6 w-full sm:w-auto"
-                >
-                  {getPersonalizedCTA()}
-                  <ArrowRight className="w-6 h-6 ml-2" />
-                </Button>
-              </motion.div>
-
-              <div className="space-y-3">
-                <p className="text-xl font-semibold">✅ Acceso inmediato después del pago</p>
-                <p className="text-lg">💳 Financiamiento hasta 3x sin interés</p>
-                <p className="text-lg">🔒 Compra 100% segura y protegida</p>
-                <p className="text-lg">🎯 Garantía de 30 días o tu dinero de vuelta</p>
-              </div>
-
-              {recentBuyers > 0 && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 1.5 }}
-                  className="mt-6 bg-red-500 text-white py-2 px-4 rounded-full inline-block"
-                >
-                  🔥 ¡{recentBuyers} personas compraron en las últimas 2 horas!
-                </motion.div>
-              )}
-            </CardContent>
-          </Card>
         </motion.div>
 
         {/* Testimonios - Reemplazado por una sola imagen flotante */}
