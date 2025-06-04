@@ -1,6 +1,7 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Inter } from "next/font/google"
+import { Inter } from 'next/font/google'
+import Script from "next/script"
 import "./globals.css"
 
 const inter = Inter({ subsets: ["latin"] })
@@ -18,44 +19,55 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR">
-      <head>
-        {/* Google tag (gtag.js) */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-KBSLRJ2FJF"></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-KBSLRJ2FJF');
-            `,
-          }}
+      <body className={inter.className}>
+        {/* Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-KBSLRJ2FJF"
+          strategy="afterInteractive"
         />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-KBSLRJ2FJF');
+          `}
+        </Script>
 
-        {/* Pixel de Rastreamento */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.pixelId = "683e4507be02a8b1bece6041";
-              var a = document.createElement("script");
-              a.setAttribute("async", "");
-              a.setAttribute("defer", "");
-              a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
-              document.head.appendChild(a);
-            `,
-          }}
-        />
+        {/* UTMfy Pixel de Rastreamento */}
+        <Script id="utmfy-pixel" strategy="afterInteractive">
+          {`
+            window.pixelId = "683e4507be02a8b1bece6041";
+            var a = document.createElement("script");
+            a.setAttribute("async", "");
+            a.setAttribute("defer", "");
+            a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+            a.onload = function() {
+              console.log('UTMfy Pixel carregado com sucesso');
+            };
+            a.onerror = function() {
+              console.error('Erro ao carregar UTMfy Pixel');
+            };
+            document.head.appendChild(a);
+          `}
+        </Script>
 
-        {/* UTMFY Tracking */}
-        <script
+        {/* UTMfy Tracking Script */}
+        <Script
           src="https://cdn.utmify.com.br/scripts/utms/latest.js"
-          data-utmify-prevent-xcod-sck
-          data-utmify-prevent-subids
-          async
-          defer
-        ></script>
-      </head>
-      <body className={inter.className}>{children}</body>
+          strategy="afterInteractive"
+          data-utmify-prevent-xcod-sck=""
+          data-utmify-prevent-subids=""
+          onLoad={() => {
+            console.log('UTMfy Tracking Script carregado com sucesso');
+          }}
+          onError={() => {
+            console.error('Erro ao carregar UTMfy Tracking Script');
+          }}
+        />
+
+        {children}
+      </body>
     </html>
   )
 }
