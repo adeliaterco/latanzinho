@@ -1358,7 +1358,6 @@ export default function ResultPage() {
   <video 
     src="https://optimalhealthscout.shop/wp-content/uploads/2025/06/prova-pronta-espanhol-joselino.mp4" 
     controls
-    autoPlay
     className="w-full h-auto object-cover"
   >
     Tu navegador no soporta el elemento de video.
