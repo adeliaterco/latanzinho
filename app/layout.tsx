@@ -6,8 +6,8 @@ import "./globals.css"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Plano A - Reconquista Rápida",
-  description: "O sistema completo para reconquistar seu amor perdido em 21 dias ou menos",
+  title: "Plan A - Recuperácion Rápida",
+  description: "El sistema completo para recuperar a tu amor perdido en 21 días o menos",
   generator: 'v0.dev'
 }
 
