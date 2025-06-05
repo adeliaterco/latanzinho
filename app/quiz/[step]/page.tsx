@@ -146,6 +146,23 @@ export default function QuizStep() {
   }
 
   const proceedToNextStep = () => {
+    // Capturar UTMs da URL atual
+    const currentUrl = new URL(window.location.href);
+    let utmString = '';
+    
+    // Verificar se há parâmetros UTM na URL atual
+    const utmParams = new URLSearchParams();
+    for (const [key, value] of currentUrl.searchParams.entries()) {
+      if (key.startsWith('utm_')) {
+        utmParams.append(key, value);
+      }
+    }
+    
+    // Se encontramos UTMs, criar a string de query
+    if (utmParams.toString() !== '') {
+      utmString = '?' + utmParams.toString();
+    }
+
     // Verificar desbloqueo de bonificación
     if (currentStep?.bonusUnlock && !unlockedBonuses.includes(currentStep.bonusUnlock.id)) {
       // Registra evento de desbloqueo de bonificación
@@ -176,9 +193,9 @@ export default function QuizStep() {
       return
     }
 
-    // Navegar al siguiente paso
+    // Navegar al siguiente paso con UTMs
     if (step < 14) {
-      router.push(`/quiz/${step + 1}`)
+      router.push(`/quiz/${step + 1}${utmString}`)
     } else {
       // Registra evento de finalización del cuestionario
       enviarEvento('concluiu_quiz', {
@@ -186,16 +203,34 @@ export default function QuizStep() {
         total_bonus_desbloqueados: unlockedBonuses.length
       });
       
-      router.push("/resultado")
+      router.push(`/resultado${utmString}`)
     }
   }
 
   const handleBonusUnlockComplete = () => {
     setShowBonusUnlock(false)
+    
+    // Capturar UTMs da URL atual
+    const currentUrl = new URL(window.location.href);
+    let utmString = '';
+    
+    // Verificar se há parâmetros UTM na URL atual
+    const utmParams = new URLSearchParams();
+    for (const [key, value] of currentUrl.searchParams.entries()) {
+      if (key.startsWith('utm_')) {
+        utmParams.append(key, value);
+      }
+    }
+    
+    // Se encontramos UTMs, criar a string de query
+    if (utmParams.toString() !== '') {
+      utmString = '?' + utmParams.toString();
+    }
+    
     if (step < 14) {
-      router.push(`/quiz/${step + 1}`)
+      router.push(`/quiz/${step + 1}${utmString}`)
     } else {
-      router.push("/resultado")
+      router.push(`/resultado${utmString}`)
     }
   }
 
@@ -206,10 +241,27 @@ export default function QuizStep() {
       para_etapa: step > 1 ? step - 1 : 'inicio'
     });
     
+    // Capturar UTMs da URL atual
+    const currentUrl = new URL(window.location.href);
+    let utmString = '';
+    
+    // Verificar se há parâmetros UTM na URL atual
+    const utmParams = new URLSearchParams();
+    for (const [key, value] of currentUrl.searchParams.entries()) {
+      if (key.startsWith('utm_')) {
+        utmParams.append(key, value);
+      }
+    }
+    
+    // Se encontramos UTMs, criar a string de query
+    if (utmParams.toString() !== '') {
+      utmString = '?' + utmParams.toString();
+    }
+    
     if (step > 1) {
-      router.push(`/quiz/${step - 1}`)
+      router.push(`/quiz/${step - 1}${utmString}`)
     } else {
-      router.push("/")
+      router.push(`/${utmString}`)
     }
   }
 
