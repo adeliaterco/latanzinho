@@ -32,7 +32,7 @@ export default function HomePage() {
     return () => clearInterval(interval)
   }, [])
 
-  // 3. Modifique esta função para registrar o início do quiz
+  // 3. Modifique esta função para registrar o início do quiz e preservar UTMs
   const handleStart = () => {
     // Registra evento de início do quiz
     enviarEvento('iniciou_quiz');
@@ -41,7 +41,40 @@ export default function HomePage() {
     localStorage.removeItem("quizData")
     localStorage.removeItem("unlockedBonuses")
     localStorage.removeItem("totalValue")
-    window.location.href = "/quiz/1"
+    
+    // Preservar UTMs no redirecionamento
+    const currentUrl = new URL(window.location.href);
+    const utmParams = new URLSearchParams();
+    
+    // Coletar todos os parâmetros UTM da URL atual
+    for (const [key, value] of currentUrl.searchParams.entries()) {
+      if (key.startsWith('utm_')) {
+        utmParams.append(key, value);
+      }
+    }
+    
+    // Se não houver UTMs na URL, verificar se estão armazenados no localStorage
+    if (utmParams.toString() === '' && localStorage.getItem('utmParams')) {
+      const storedUtms = JSON.parse(localStorage.getItem('utmParams'));
+      for (const key in storedUtms) {
+        if (key.startsWith('utm_')) {
+          utmParams.append(key, storedUtms[key]);
+        }
+      }
+    }
+    
+    // Armazenar UTMs no localStorage para uso em páginas futuras
+    if (utmParams.toString() !== '') {
+      const utmObject = {};
+      for (const [key, value] of utmParams.entries()) {
+        utmObject[key] = value;
+      }
+      localStorage.setItem('utmParams', JSON.stringify(utmObject));
+    }
+    
+    // Construir a URL de destino com os parâmetros UTM
+    const targetUrl = `/quiz/1${utmParams.toString() ? '?' + utmParams.toString() : ''}`;
+    window.location.href = targetUrl;
   }
 
   return (
