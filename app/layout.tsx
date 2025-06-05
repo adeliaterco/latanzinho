@@ -47,14 +47,16 @@ export default function RootLayout({
           }}
         />
 
-        {/* UTMFY Tracking */}
+        {/* UTMFY Tracking - Ajustado para Hotmart */}
         <script
           src="https://cdn.utmify.com.br/scripts/utms/latest.js"
-          data-utmify-prevent-xcod-sck
           data-utmify-prevent-subids
           async
           defer
-        />
+        ></script>
+        
+        {/* Favicon para evitar erro 404 */}
+        <link rel="icon" href="/favicon.ico" sizes="any" />
       </head>
       <body className={inter.className}>{children}</body>
     </html>
