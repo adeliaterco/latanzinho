@@ -33,7 +33,7 @@ export default function RootLayout({
           }}
         />
 
-        {/* Pixel de Rastreamento */}
+        {/* Pixel de Rastreamento - Corrigido com o ID correto */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -47,7 +47,7 @@ export default function RootLayout({
           }}
         />
 
-        {/* UTMFY Tracking - Ajustado para Hotmart */}
+        {/* UTMFY Tracking - Configuração para Hotmart */}
         <script
           src="https://cdn.utmify.com.br/scripts/utms/latest.js"
           data-utmify-prevent-subids
@@ -55,7 +55,7 @@ export default function RootLayout({
           defer
         ></script>
         
-        {/* Favicon para evitar erro 404 */}
+        {/* Favicon */}
         <link rel="icon" href="/favicon.ico" sizes="any" />
       </head>
       <body className={inter.className}>{children}</body>
