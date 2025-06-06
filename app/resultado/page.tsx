@@ -644,7 +644,7 @@ export default function ResultPage() {
                     <BookOpen className="w-10 h-10 text-white" />
                   </div>
                   <div>
-                    <h4 className="text-3xl font-bold text-orange-400">PLAN A - RECONQUISTA RÁPIDA</h4>
+                    <h4 className="text-3xl font-bold text-orange-400">PLAN A - RECUPERACÓN RÁPIDA</h4>
                     <p className="text-orange-300 font-semibold text-lg">Sistema Completo de Reconquista en 21 Días</p>
                   </div>
                 </div>
@@ -843,7 +843,7 @@ export default function ResultPage() {
                   <td className="p-4 text-center text-gray-300">❌</td>
                 </tr>
                 <tr className="bg-gradient-to-r from-orange-900/30 to-orange-800/30">
-                  <td className="p-4 text-orange-400 font-bold">PLAN A - RECONQUISTA RÁPIDA</td>
+                  <td className="p-4 text-orange-400 font-bold">PLAN A - RECUPERACÓN RÁPIDA</td>
                   <td className="p-4 text-center text-orange-300 font-bold">21 días</td>
                   <td className="p-4 text-center text-orange-300 font-bold">$9</td>
                   <td className="p-4 text-center text-orange-300 font-bold">87-97%</td>
@@ -1102,7 +1102,7 @@ export default function ResultPage() {
         🔥 OFERTA LIMITADA - SOLO HOY
       </div>
 
-      <h3 className="text-3xl md:text-5xl font-bold mb-4">PLAN A - RECONQUISTA RÁPIDA</h3>
+      <h3 className="text-3xl md:text-5xl font-bold mb-4">PLAN A - RECUPERACÓN RÁPIDA</h3>
 
       <p className="text-xl md:text-2xl mb-6 font-semibold">
         El Sistema Completo que Ya Reconquistó Más de 3.847 Relaciones
