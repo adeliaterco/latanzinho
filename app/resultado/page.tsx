@@ -201,7 +201,7 @@ export default function ResultPage() {
                     className="relative z-10 bg-white rounded-xl p-3 shadow-2xl border-2 border-orange-400 mb-8"
                   >
                     <img
-                      src="https://optimalhealthscout.shop/wp-content/uploads/2025/06/Plan-A-Espanhol-1.png"
+                      src="https://comprarplanseguro.shop/wp-content/uploads/2025/06/Nova-Imagem-Plan-A-Livro.png"
                       alt="Resultado Real de Transformación"
                       className="w-full h-auto rounded-lg shadow-lg"
                     />
@@ -223,7 +223,7 @@ export default function ResultPage() {
                     className="relative z-10 bg-white rounded-xl p-3 shadow-2xl border-2 border-yellow-400 mt-12"
                   >
                     <img
-                      src="https://comprarplanseguro.shop/wp-content/uploads/2025/06/imagem_gerada-2025-06-05T182134.978.png"
+                      src="https://comprarplanseguro.shop/wp-content/uploads/2025/06/Nova-Imagem-21-gatilhos-A-Livro.png"
                       alt="21 Gatillos Emocionales"
                       className="w-full h-auto rounded-lg shadow-lg"
                     />
