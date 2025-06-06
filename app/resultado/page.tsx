@@ -175,98 +175,65 @@ export default function ResultPage() {
                   </div>
                 </div>
 
-{/* Imagem Plan A - Já existente */}
-<motion.div
-  animate={{
-    y: [0, -12, 0],
-    scale: [1, 1.02, 1],
-    rotate: [0, 0.8, -0.8, 0],
-  }}
-  transition={{
-    duration: 5,
-    repeat: Number.POSITIVE_INFINITY,
-    ease: "easeInOut",
-  }}
-  className="relative z-10 bg-white rounded-xl p-3 shadow-2xl border-2 border-orange-400 mb-8"
->
-  <img
-    src="https://optimalhealthscout.shop/wp-content/uploads/2025/06/Plan-A-Espanhol-1.png"
-    alt="Resultado Real de Transformación"
-    className="w-full h-auto rounded-lg shadow-lg"
-  />
-</motion.div>
+                {/* Imagen animada permanece igual */}
+                <div className="mt-8 relative">
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-orange-500/30 to-red-600/30 blur-2xl animate-pulse"></div>
+                  <div
+                    className="absolute inset-0 rounded-2xl bg-gradient-to-r from-yellow-400/20 to-orange-500/20 blur-xl animate-pulse"
+                    style={{ animationDelay: "1s" }}
+                  ></div>
+                  <div
+                    className="absolute inset-0 rounded-2xl bg-gradient-to-r from-red-500/15 to-pink-500/15 blur-lg animate-pulse"
+                    style={{ animationDelay: "2s" }}
+                  ></div>
 
-{/* Nova Imagem - 21 Gatilhos */}
-<div className="mt-8 relative">
-  <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-yellow-500/30 to-orange-600/30 blur-2xl animate-pulse"></div>
-  <div
-    className="absolute inset-0 rounded-2xl bg-gradient-to-r from-orange-400/20 to-red-500/20 blur-xl animate-pulse"
-    style={{ animationDelay: "1.5s" }}
-  ></div>
-  <div
-    className="absolute inset-0 rounded-2xl bg-gradient-to-r from-red-500/15 to-yellow-500/15 blur-lg animate-pulse"
-    style={{ animationDelay: "2.5s" }}
-  ></div>
+                  <motion.div
+                    animate={{
+                      y: [0, -12, 0],
+                      scale: [1, 1.02, 1],
+                      rotate: [0, 0.8, -0.8, 0],
+                    }}
+                    transition={{
+                      duration: 5,
+                      repeat: Number.POSITIVE_INFINITY,
+                      ease: "easeInOut",
+                    }}
+                    className="relative z-10 bg-white rounded-xl p-3 shadow-2xl border-2 border-orange-400"
+                  >
+                    <img
+                      src="https://optimalhealthscout.shop/wp-content/uploads/2025/06/Plan-A-Espanhol-1.png"
+                      alt="Resultado Real de Transformación"
+                      className="w-full h-auto rounded-lg shadow-lg"
+                    />
+                  </motion.div>
 
-  <motion.div
-    animate={{
-      y: [0, -10, 0],
-      scale: [1, 1.03, 1],
-      rotate: [0, -0.7, 0.7, 0],
-    }}
-    transition={{
-      duration: 6,
-      repeat: Number.POSITIVE_INFINITY,
-      ease: "easeInOut",
-      delay: 1, // Pequeno atraso para não sincronizar com a primeira animação
-    }}
-    className="relative z-10 bg-white rounded-xl p-3 shadow-2xl border-2 border-yellow-400"
-  >
-    <img
-      src="https://comprarplanseguro.shop/wp-content/uploads/2025/06/imagem_gerada-2025-06-05T182134.978.png"
-      alt="21 Gatilhos Emocionales"
-      className="w-full h-auto rounded-lg shadow-lg"
-    />
-    <div className="absolute -top-4 -right-4 bg-yellow-500 text-black font-bold py-1 px-3 rounded-full text-sm transform rotate-12 shadow-lg">
-      ¡INCLUIDO!
-    </div>
-  </motion.div>
-
-  {/* Partículas animadas - com cores diferentes da primeira imagem */}
-  {[...Array(8)].map((_, i) => (
-    <motion.div
-      key={`particles-2-${i}`}
-      className={`absolute w-3 h-3 rounded-full opacity-60 ${
-        i % 3 === 0 ? "bg-yellow-400" : i % 3 === 1 ? "bg-orange-400" : "bg-red-400"
-      }`}
-      animate={{
-        x: [0, Math.random() * 120 - 60, 0],
-        y: [0, Math.random() * 120 - 60, 0],
-        opacity: [0.3, 1, 0.3],
-        scale: [0.5, 1.8, 0.5],
-      }}
-      transition={{
-        duration: 4 + Math.random() * 3,
-        repeat: Number.POSITIVE_INFINITY,
-        delay: i * 0.4 + 2, // Atraso diferente da primeira animação
-      }}
-      style={{
-        left: `${15 + Math.random() * 70}%`,
-        top: `${15 + Math.random() * 70}%`,
-      }}
-    />
-  ))}
-</div>
-
-{/* Texto explicativo abaixo das imagens */}
-<div className="mt-6 bg-gradient-to-r from-yellow-50 to-orange-50 p-4 rounded-lg border border-yellow-200">
-  <h4 className="text-xl font-bold text-orange-800 mb-2 text-center">PLAN A + 21 GATILLOS EMOCIONALES</h4>
-  <p className="text-orange-700 text-center">
-    Además del sistema completo Plan A, recibirás los <span className="font-bold">21 Gatillos Emocionales</span> que 
-    activan el deseo inmediato y despiertan sentimientos profundos en {getPersonalizedPronoun()}, 
-    acelerando tu proceso de reconquista.
-  </p>
-</div>
+                  {[...Array(8)].map((_, i) => (
+                    <motion.div
+                      key={i}
+                      className={`absolute w-3 h-3 rounded-full opacity-60 ${
+                        i % 3 === 0 ? "bg-orange-400" : i % 3 === 1 ? "bg-yellow-400" : "bg-red-400"
+                      }`}
+                      animate={{
+                        x: [0, Math.random() * 120 - 60, 0],
+                        y: [0, Math.random() * 120 - 60, 0],
+                        opacity: [0.3, 1, 0.3],
+                        scale: [0.5, 1.8, 0.5],
+                      }}
+                      transition={{
+                        duration: 4 + Math.random() * 3,
+                        repeat: Number.POSITIVE_INFINITY,
+                        delay: i * 0.4,
+                      }}
+                      style={{
+                        left: `${15 + Math.random() * 70}%`,
+                        top: `${15 + Math.random() * 70}%`,
+                      }}
+                    />
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
 
           {/* Sobre el Creador del Método */}
           <div id="metodo" className="max-w-4xl mx-auto mb-12">
