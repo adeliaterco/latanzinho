@@ -175,7 +175,7 @@ export default function ResultPage() {
                   </div>
                 </div>
 
-                {/* Imagen animada permanece igual */}
+                {/* Imágenes animadas - Plan A y 21 Gatillos */}
                 <div className="mt-8 relative">
                   <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-orange-500/30 to-red-600/30 blur-2xl animate-pulse"></div>
                   <div
@@ -198,7 +198,7 @@ export default function ResultPage() {
                       repeat: Number.POSITIVE_INFINITY,
                       ease: "easeInOut",
                     }}
-                    className="relative z-10 bg-white rounded-xl p-3 shadow-2xl border-2 border-orange-400"
+                    className="relative z-10 bg-white rounded-xl p-3 shadow-2xl border-2 border-orange-400 mb-8"
                   >
                     <img
                       src="https://optimalhealthscout.shop/wp-content/uploads/2025/06/Plan-A-Espanhol-1.png"
@@ -207,7 +207,33 @@ export default function ResultPage() {
                     />
                   </motion.div>
 
-                  {[...Array(8)].map((_, i) => (
+                  {/* 21 Gatillos Emocionales */}
+                  <motion.div
+                    animate={{
+                      y: [0, -10, 0],
+                      scale: [1, 1.03, 1],
+                      rotate: [0, -0.7, 0.7, 0],
+                    }}
+                    transition={{
+                      duration: 6,
+                      repeat: Number.POSITIVE_INFINITY,
+                      ease: "easeInOut",
+                      delay: 1,
+                    }}
+                    className="relative z-10 bg-white rounded-xl p-3 shadow-2xl border-2 border-yellow-400 mt-12"
+                  >
+                    <img
+                      src="https://comprarplanseguro.shop/wp-content/uploads/2025/06/imagem_gerada-2025-06-05T182134.978.png"
+                      alt="21 Gatillos Emocionales"
+                      className="w-full h-auto rounded-lg shadow-lg"
+                    />
+                    <div className="absolute -top-4 -right-4 bg-yellow-500 text-black font-bold py-1 px-3 rounded-full text-sm transform rotate-12 shadow-lg">
+                      ¡INCLUIDO!
+                    </div>
+                  </motion.div>
+
+                  {/* Partículas animadas para ambas imágenes */}
+                  {[...Array(12)].map((_, i) => (
                     <motion.div
                       key={i}
                       className={`absolute w-3 h-3 rounded-full opacity-60 ${
@@ -222,14 +248,24 @@ export default function ResultPage() {
                       transition={{
                         duration: 4 + Math.random() * 3,
                         repeat: Number.POSITIVE_INFINITY,
-                        delay: i * 0.4,
+                        delay: i * 0.3,
                       }}
                       style={{
                         left: `${15 + Math.random() * 70}%`,
-                        top: `${15 + Math.random() * 70}%`,
+                        top: `${i < 6 ? 15 + Math.random() * 30 : 50 + Math.random() * 30}%`,
                       }}
                     />
                   ))}
+                  
+                  {/* Texto explicativo */}
+                  <div className="mt-6 bg-gradient-to-r from-yellow-50 to-orange-50 p-4 rounded-lg border border-yellow-200 relative z-10">
+                    <h4 className="text-xl font-bold text-orange-800 mb-2 text-center">PLAN A + 21 GATILLOS EMOCIONALES</h4>
+                    <p className="text-orange-700 text-center">
+                      Además del sistema completo Plan A, recibirás los <span className="font-bold">21 Gatillos Emocionales</span> que 
+                      activan el deseo inmediato y despiertan sentimientos profundos en {getPersonalizedPronoun()}, 
+                      acelerando tu proceso de reconquista.
+                    </p>
+                  </div>
                 </div>
               </CardContent>
             </Card>
