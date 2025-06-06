@@ -126,7 +126,7 @@ export default function HomePage() {
                   className="relative w-full h-full rounded-full overflow-hidden border-4 border-orange-500 shadow-lg shadow-orange-500/30 z-10"
                 >
                   <img
-                    src="https://optimalhealthscout.shop/wp-content/uploads/2025/05/500151711_949235423852094_7663597077093180780_n.jpg"
+                    src="https://comprarplanseguro.shop/wp-content/uploads/2025/06/Nova-Imagem-Plan-A-Livro.png"
                     alt="Logo Plano A - Reconquista"
                     className="w-full h-full object-cover"
                   />
