@@ -62,7 +62,7 @@ export function BonusUnlock({ bonus, onComplete }: BonusUnlockProps) {
               >
                 <Gift className="w-10 h-10 text-white" />
               </motion.div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">🎉 BÔNUS DESBLOQUEADO!</h2>
+              <h2 className="text-2xl font-bold text-gray-900 mb-2">🎉 BONUS DESBLOQUEADO!</h2>
             </motion.div>
 
             <motion.div
@@ -83,7 +83,7 @@ export function BonusUnlock({ bonus, onComplete }: BonusUnlockProps) {
               className="space-y-4"
             >
               <p className="text-gray-600 text-sm bg-gray-100 p-3 rounded-lg">
-                Você receberá este bônus junto com o Plano A ao final do quiz!
+                Recibirás esta bonificación junto con el Plan A al final del cuestionario.
               </p>
 
               <div className="flex justify-center">
