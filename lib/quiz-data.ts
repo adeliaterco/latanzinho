@@ -3,7 +3,7 @@ export const quizSteps = [
     id: 1,
     question: "¡NO DEJES QUE LA PERSONA QUE AMAS SALGA DE TU VIDA PARA SIEMPRE!",
     description:
-      "Haz la prueba rápida de 2 minutos y descubre cómo aplicar el PLAN A - RECONQUISTA RÁPIDA en tu caso específico.",
+      "Haz la prueba rápida de 2 minutos y descubre cómo aplicar el PLAN A - en tu caso específico.",
     subtext: "Selecciona tu género:",
     options: ["MASCULINO", "FEMENINO"],
     warning:
