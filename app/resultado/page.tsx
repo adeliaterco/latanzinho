@@ -1205,7 +1205,7 @@ export default function ResultPage() {
                   className="bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-white font-bold py-3 px-6 rounded-full text-lg shadow-lg hover:shadow-xl transition-all duration-300"
                   onTouchStart={handleTouchFeedback}
                 >
-                  QUIERO RESULTADOS COMO MARÍA
+                  QUIERO RESULTADOS ASÍ
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </Button>
               </motion.div>
