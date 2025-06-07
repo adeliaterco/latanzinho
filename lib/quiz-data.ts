@@ -212,7 +212,7 @@ export const quizSteps = [
     id: 11,
     question: "¡FELICIDADES! Analicé tus respuestas y tengo buenas noticias para ti.",
     description:
-      "Con base en tu perfil y situación específica, el PLAN A - RECUPERACIÓN RÁPIDA tiene un 91% de probabilidad de funcionar en tu caso.",
+      "Con base en tu perfil y situación específica, el PLAN A - RECUPERACIÓN RÁPIDA tiene un 90,5% de probabilidad de funcionar en tu caso.",
     options: ["¿VAMOS AL SIGUIENTE PASO?"],
     note: "Estoy aquí para guiarte personalmente en este viaje de reconquista. En los últimos 7 años, he ayudado a más de 3.847 personas a recuperar sus relaciones usando este método exclusivo.",
     elements: {
