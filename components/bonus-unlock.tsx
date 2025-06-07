@@ -62,7 +62,7 @@ export function BonusUnlock({ bonus, onComplete }: BonusUnlockProps) {
               >
                 <Gift className="w-10 h-10 text-white" />
               </motion.div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">🎉 BONUS DESBLOQUEADO!</h2>
+              <h2 className="text-2xl font-bold text-gray-900 mb-2">🎉 BONOS DESBLOQUEADO!</h2>
             </motion.div>
 
             <motion.div
