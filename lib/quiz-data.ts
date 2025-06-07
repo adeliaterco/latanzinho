@@ -220,7 +220,7 @@ export const quizSteps = [
       expertImage: "https://optimalhealthscout.shop/wp-content/uploads/2025/06/imagem_gerada-2025-06-01T212625.544.png",
       profileComplete: "95%",
       helpedCounter: "Personas ayudadas hoy: 17",
-      compatibilityCalc: "91%",
+      compatibilityCalc: "90,5%",
     },
   },
   {
