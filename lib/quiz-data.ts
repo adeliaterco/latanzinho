@@ -3,7 +3,7 @@ export const quizSteps = [
     id: 1,
     question: "¡NO DEJES QUE LA PERSONA QUE AMAS SALGA DE TU VIDA PARA SIEMPRE!",
     description:
-      "Haz la prueba rápida de 2 minutos y descubre cómo aplicar el PLAN A - RECONQUISTA RÁPIDA en tu caso específico.",
+      "Haz la prueba rápida de 2 minutos y descubre cómo aplicar el PLAN A - en tu caso específico.",
     subtext: "Selecciona tu género:",
     options: ["MASCULINO", "FEMENINO"],
     warning:
@@ -212,7 +212,7 @@ export const quizSteps = [
     id: 11,
     question: "¡FELICIDADES! Analicé tus respuestas y tengo buenas noticias para ti.",
     description:
-      "Con base en tu perfil y situación específica, el PLAN A - RECONQUISTA RÁPIDA tiene un 91% de probabilidad de funcionar en tu caso.",
+      "Con base en tu perfil y situación específica, el PLAN A - RECUPERACIÓN RÁPIDA tiene un 91% de probabilidad de funcionar en tu caso.",
     options: ["¿VAMOS AL SIGUIENTE PASO?"],
     note: "Estoy aquí para guiarte personalmente en este viaje de reconquista. En los últimos 7 años, he ayudado a más de 3.847 personas a recuperar sus relaciones usando este método exclusivo.",
     elements: {
@@ -227,7 +227,7 @@ export const quizSteps = [
     id: 12,
     question: "RESULTADOS COMPROBADOS",
     subtext:
-      "EL 91% DE MIS ALUMNOS VIERON RESULTADOS EXPRESIVOS EN LOS PRIMEROS 7 DÍAS APLICANDO EL PLAN A - RECONQUISTA RÁPIDA",
+      "EL 91% DE MIS ALUMNOS VIERON RESULTADOS EXPRESIVOS EN LOS PRIMEROS 7 DÍAS APLICANDO EL PLAN A - RECUPERACIÓN RÁPIDA",
     description: "",
     options: ["¡YO TAMBIÉN QUIERO ESOS RESULTADOS!"],
     elements: {
@@ -238,7 +238,7 @@ export const quizSteps = [
   },
   {
     id: 13,
-    question: "TU PLAN A - RECONQUISTA RÁPIDA DE 21 DÍAS",
+    question: "TU PLAN A - RECUPERACIÓN RÁPIDA DE 21 DÍAS",
     description: "Desarrollado específicamente para tu caso, basado en tus respuestas.",
     subtext:
       "Este sistema paso a paso ya ha ayudado a 3.847 personas a reconquistar a su ex y construir relaciones aún más fuertes que antes.",
