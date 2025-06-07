@@ -323,7 +323,7 @@ export const testimonials = [
 
 export const socialProofMessages = [
   "¡Estás entre el 17% más determinado a reconquistar!",
-  "¡Tu perfil muestra 91% de compatibilidad con el método!",
+  "¡Tu perfil muestra 90,5% de compatibilidad con el método!",
   "¡Has desbloqueado los 2 bonos - valor total de $84!",
   "El 87% de las personas en tu situación lograron resultados en menos de 14 días",
   "Estás más comprometido que el 73% de las personas que hicieron esta prueba",
