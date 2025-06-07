@@ -349,7 +349,7 @@ export default function ResultPage() {
                       className="w-full h-auto rounded-lg shadow-lg product-image"
                     />
                     <div className="absolute -top-4 -right-4 bg-yellow-500 text-black font-bold py-1 px-3 rounded-full text-sm transform rotate-12 shadow-lg">
-                      ¡BONO #1!
+                      ¡BONO0 #1!
                     </div>
                     <div className="mt-3 text-center">
                       <h4 className="font-bold text-orange-800">21 GATILLOS EMOCIONALES</h4>
