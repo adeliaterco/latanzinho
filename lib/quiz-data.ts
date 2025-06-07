@@ -3,7 +3,7 @@ export const quizSteps = [
     id: 1,
     question: "¡NO DEJES QUE LA PERSONA QUE AMAS SALGA DE TU VIDA PARA SIEMPRE!",
     description:
-      "Haz la prueba rápida de 2 minutos y descubre cómo aplicar el PLAN A - en tu caso específico.",
+      "Haz la prueba rápida de 2 minutos y descubre cómo aplicar el PLAN A - RECONQUISTA RÁPIDA en tu caso específico.",
     subtext: "Selecciona tu género:",
     options: ["MASCULINO", "FEMENINO"],
     warning:
@@ -48,9 +48,9 @@ export const quizSteps = [
     },
     bonusUnlock: {
       id: 1,
-      title: "GUÍA RÁPIDA: 5 ERRORES FATALES QUE IMPIDEN LA RECONQUISTA",
-      value: 37,
-      description: "Manual completo para evitar los errores que el 97% de las personas cometen al intentar reconquistar a su ex",
+      title: "21 GATILLOS EMOCIONALES QUE FUNCIONAN",
+      value: 47,
+      description: "Las 21 frases exactas que hacen que piense en ti obsesivamente.",
     },
   },
   {
@@ -87,15 +87,6 @@ export const quizSteps = [
       "De 6 meses a 1 año - Fase crítica que responde bien a los 21 Gatillos Emocionales",
       "Menos de 6 meses - Requiere técnicas específicas de reconexión rápida",
     ],
-    bonusUnlock: {
-      id: 2,
-      title: {
-        masculino: "CÓMO HACER QUE ELLA TE EXTRAÑE EN 72 HORAS",
-        feminino: "CÓMO HACER QUE ÉL TE EXTRAÑE EN 72 HORAS",
-      },
-      value: 27,
-      description: "Cronograma hora por hora para los 3 días críticos que determinan el éxito de tu reconquista",
-    },
   },
   {
     id: 6,
@@ -180,15 +171,10 @@ export const quizSteps = [
       ],
     },
     bonusUnlock: {
-      id: 3,
-      title: "CÓDIGO DE LA ATRACCIÓN: LOS 7 PILARES DE LA PRESENCIA IRRESISTIBLE",
-      value: 29,
-      description: {
-        masculino:
-          "Transfórmate en el hombre al que ella no puede resistirse, desarrollando los 7 fundamentos de la atracción auténtica",
-        feminino:
-          "Transfórmate en la mujer a la que él no puede resistirse, desarrollando los 7 fundamentos de la atracción auténtica",
-      },
+      id: 2,
+      title: "PROTOCOLO DE EMERGENCIA 72H",
+      value: 37,
+      description: "Qué hacer cuando todo parece perdido y tienes 72 horas para actuar.",
     },
     elements: {
       profileComplete: "77%",
@@ -204,12 +190,6 @@ export const quizSteps = [
     subtext: "El 91% de las personas que seleccionaron nivel 4 reconquistaron a su ex en menos de 21 días usando el PLAN A.",
     options: ["1 - No estoy seguro", "2 - Lo estoy considerando", "3 - Lo quiero bastante", "4 - Lo quiero mucho"],
     note: "Solo trabajo con personas determinadas a transformar su situación amorosa. El PLAN A - RECONQUISTA RÁPIDA fue desarrollado para quien está listo para actuar.",
-    bonusUnlock: {
-      id: 4,
-      title: "101 TEXTOS LISTOS PARA RECONQUISTAR",
-      value: 24,
-      description: "Biblioteca completa de mensajes probados y aprobados para cada fase de la reconquista",
-    },
     elements: {
       thermometer: true,
       profileComplete: "85%",
@@ -250,15 +230,6 @@ export const quizSteps = [
       "EL 91% DE MIS ALUMNOS VIERON RESULTADOS EXPRESIVOS EN LOS PRIMEROS 7 DÍAS APLICANDO EL PLAN A - RECONQUISTA RÁPIDA",
     description: "",
     options: ["¡YO TAMBIÉN QUIERO ESOS RESULTADOS!"],
-    bonusUnlock: {
-      id: 5,
-      title: {
-        masculino: "CÓMO IDENTIFICAR SI ELLA TODAVÍA TIENE SENTIMIENTOS POR TI",
-        feminino: "CÓMO IDENTIFICAR SI ÉL TODAVÍA TIENE SENTIMIENTOS POR TI",
-      },
-      value: 17,
-      description: "15 señales inconfundibles que revelan si existe una oportunidad real de reconquista",
-    },
     elements: {
       bigNumber: "91%",
       profileComplete: "98%",
@@ -275,7 +246,7 @@ export const quizSteps = [
       masculino: ["¡SÍ, QUIERO RECONQUISTARLA AHORA!"],
       feminino: ["¡SÍ, QUIERO RECONQUISTARLO AHORA!"],
     },
-    note: "¡Incluye los 5 bonos exclusivos (valor total: $197) que aceleran tu reconquista!",
+    note: "¡Incluye los 2 bonos exclusivos (valor total: $84) que aceleran tu reconquista!",
     elements: {
       plan21Days: true,
       profileComplete: "100%",
@@ -305,46 +276,26 @@ export const quizSteps = [
 export const bonuses = [
   {
     id: 1,
-    title: "21 GATILLOS EMOCIONALES INFALIBLES",
-    value: 37,
-    description:
-      "Domina los exactos gatillos psicológicos que activan atracción instantánea y deseo profundo, con ejemplos prácticos para cada situación.",
+    title: "21 GATILLOS EMOCIONALES QUE FUNCIONAN",
+    value: 47,
+    description: "Las 21 frases exactas que hacen que piense en ti obsesivamente.",
+    details: [
+      "✓ 7 Gatillos de Nostalgia",
+      "✓ 7 Gatillos de Curiosidad",
+      "✓ 7 Gatillos de Deseo"
+    ]
   },
   {
     id: 2,
-    title: {
-      masculino: "CÓMO HACER QUE ELLA TE EXTRAÑE EN 72 HORAS",
-      feminino: "CÓMO HACER QUE ÉL TE EXTRAÑE EN 72 HORAS",
-    },
-    value: 27,
-    description: "Cronograma hora por hora para los 3 días críticos que determinan el éxito de tu reconquista.",
-  },
-  {
-    id: 3,
-    title: "CÓDIGO DE LA ATRACCIÓN: LOS 7 PILARES DE LA PRESENCIA IRRESISTIBLE",
-    value: 29,
-    description: {
-      masculino:
-        "Transfórmate en el hombre al que ella no puede resistirse, desarrollando los 7 fundamentos de la atracción auténtica.",
-      feminino:
-        "Transfórmate en la mujer a la que él no puede resistirse, desarrollando los 7 fundamentos de la atracción auténtica.",
-    },
-  },
-  {
-    id: 4,
-    title: "101 TEXTOS LISTOS PARA RECONQUISTAR",
-    value: 24,
-    description: "Biblioteca completa de mensajes probados y aprobados para cada fase de la reconquista.",
-  },
-  {
-    id: 5,
-    title: {
-      masculino: "CÓMO IDENTIFICAR SI ELLA TODAVÍA TIENE SENTIMIENTOS POR TI",
-      feminino: "CÓMO IDENTIFICAR SI ÉL TODAVÍA TIENE SENTIMIENTOS POR TI",
-    },
-    value: 17,
-    description: "15 señales inconfundibles que revelan si existe una oportunidad real de reconquista.",
-  },
+    title: "PROTOCOLO DE EMERGENCIA 72H",
+    value: 37,
+    description: "Qué hacer cuando todo parece perdido y tienes 72 horas para actuar.",
+    details: [
+      "✓ Plan de Acción Inmediata",
+      "✓ Independencia Emocional",
+      "✓ Comunicación Magnética"
+    ]
+  }
 ]
 
 export const testimonials = [
@@ -373,7 +324,7 @@ export const testimonials = [
 export const socialProofMessages = [
   "¡Estás entre el 17% más determinado a reconquistar!",
   "¡Tu perfil muestra 91% de compatibilidad con el método!",
-  "¡Has desbloqueado los 5 bonos - valor total de $197!",
+  "¡Has desbloqueado los 2 bonos - valor total de $84!",
   "El 87% de las personas en tu situación lograron resultados en menos de 14 días",
   "Estás más comprometido que el 73% de las personas que hicieron esta prueba",
 ]
