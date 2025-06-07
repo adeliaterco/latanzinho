@@ -517,7 +517,7 @@ export default function QuizStep() {
               {currentStep?.elements?.compatibilityCalc && (
                 <motion.div
                   initial={{ width: 0 }}
-                  animate={{ width: "90,5%" }}
+                  animate={{ width: "90%" }}
                   transition={{ duration: 2, delay: 0.5 }}
                   className="mb-6"
                 >
