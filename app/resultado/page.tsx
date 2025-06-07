@@ -344,7 +344,7 @@ export default function ResultPage() {
                     className="relative z-10 bg-white rounded-xl p-3 shadow-2xl border-2 border-yellow-400"
                   >
                     <img
-                      src="https://comprarplanseguro.shop/wp-content/uploads/2025/06/Nova-Imagem-21-gatilhos-A-Livro.png"
+                      src="https://comprarplanseguro.shop/wp-content/uploads/2025/06/21-gatillos-nova-espanhol.png"
                       alt="21 Gatillos Emocionales"
                       className="w-full h-auto rounded-lg shadow-lg product-image"
                     />
