@@ -126,16 +126,6 @@ export default function ResultPage() {
       </div>
 
       <div className="max-w-6xl mx-auto">
-        {/* Banner de escassez no topo - Mais urgente e específico */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : -20 }}
-          className="bg-red-600 text-white p-3 rounded-lg text-center mb-6 animate-pulse"
-        >
-          <AlertTriangle className="w-5 h-5 inline-block mr-2" />
-          <span className="font-bold">OFERTA LIMITADA:</span> El Sistema Plan A + los 2 bonos solo por <span className="font-bold text-yellow-300">$9</span> durante las próximas <CountdownTimer minutes={15} seconds={0} />.
-        </motion.div>
-        
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : -20 }}
