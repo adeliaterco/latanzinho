@@ -3,35 +3,20 @@
 import { useState, useEffect } from "react"
 import { ArrowRight, Lock } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
 import { useRouter } from "next/navigation"
 import Head from "next/head"
-import Image from "next/image"
 
 // Função otimizada para enviar eventos ao Google Analytics
 const enviarEvento = (nombre_evento, propriedades = {}) => {
-  if (typeof window === 'undefined') return;
+  if (typeof window === 'undefined' || !window.gtag) return;
   
-  const runWhenIdle = (callback) => {
-    if ('requestIdleCallback' in window) {
-      window.requestIdleCallback(callback);
-    } else {
-      setTimeout(callback, 200);
-    }
-  };
-
-  runWhenIdle(() => {
+  setTimeout(() => {
     try {
-      if (window.gtag) {
-        window.gtag('event', nombre_evento, propriedades);
-      } else {
-        window._gtagEvents = window._gtagEvents || [];
-        window._gtagEvents.push({event: nombre_evento, props: propriedades});
-      }
+      window.gtag('event', nombre_evento, propriedades);
     } catch (error) {
       // Silenciar erros em produção
     }
-  });
+  }, 100);
 };
 
 export default function HomePage() {
@@ -45,17 +30,10 @@ export default function HomePage() {
   const [errorMessage, setErrorMessage] = useState("")
   const [isLowEndDevice, setIsLowEndDevice] = useState(false)
   
-  // Detectar dispositivos de baixo desempenho - implementação otimizada
+  // Detectar dispositivos de baixo desempenho - implementação simplificada
   useEffect(() => {
     if (typeof window === 'undefined') return;
     
-    // Simplificar detecção
-    const isLowEnd = 
-      (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 2) || 
-      (navigator.deviceMemory && navigator.deviceMemory <= 2) ||
-      window.innerWidth < 768;
-    
-    setIsLowEndDevice(isLowEnd);
     setIsOnline(navigator.onLine);
     
     // Simplificar listeners
@@ -69,77 +47,37 @@ export default function HomePage() {
     };
   }, []);
   
-  // Efeito para métricas - implementação otimizada
+  // Efeito para métricas - implementação simplificada
   useEffect(() => {
     if (typeof window === 'undefined') return;
     
-    // Marcar como carregado imediatamente para melhorar LCP
+    // Marcar como carregado imediatamente
     setIsLoaded(true);
     
-    // Usar IntersectionObserver para carregar métricas apenas quando visível
-    const observer = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) {
-        // Registrar visualização quando visível
-        const runMetrics = () => {
-          enviarEvento('visualizo_pagina_inicial', {
-            device_type: window.innerWidth <= 768 ? 'mobile' : 'desktop'
-          });
-          
-          // Registrar métricas apenas se disponíveis
-          if ('performance' in window && 'getEntriesByType' in window.performance) {
-            const perfEntries = window.performance.getEntriesByType('navigation');
-            if (perfEntries && perfEntries.length > 0) {
-              const perfData = perfEntries[0];
-              enviarEvento('metricas_rendimiento', {
-                domContentLoaded: Math.round(perfData.domContentLoadedEventEnd - perfData.domContentLoadedEventStart),
-                loadTime: Math.round(perfData.loadEventEnd - perfData.fetchStart),
-                deviceType: window.innerWidth <= 768 ? 'mobile' : 'desktop'
-              });
-            }
-          }
-        };
-        
-        // Executar métricas após a página estar completamente carregada
-        if (document.readyState === 'complete') {
-          runMetrics();
-        } else {
-          window.addEventListener('load', runMetrics, { once: true });
-        }
-        
-        observer.disconnect();
-      }
-    });
-    
-    // Observar o elemento principal
-    const mainElement = document.querySelector('.min-h-screen');
-    if (mainElement) {
-      observer.observe(mainElement);
-    }
-    
-    // Contador de urgência otimizado - usar requestAnimationFrame
-    let urgencyUpdateTime = Date.now();
-    let urgencyFrameId;
-    
-    const updateUrgency = () => {
-      const now = Date.now();
-      if (now - urgencyUpdateTime > 45000) { // 45 segundos
-        setUrgencyCount(prev => prev + Math.floor(Math.random() * 3));
-        urgencyUpdateTime = now;
-      }
-      urgencyFrameId = requestAnimationFrame(updateUrgency);
+    // Registrar visualização após carregamento
+    const handleLoad = () => {
+      enviarEvento('visualizo_pagina_inicial', {
+        device_type: window.innerWidth <= 768 ? 'mobile' : 'desktop'
+      });
     };
     
-    urgencyFrameId = requestAnimationFrame(updateUrgency);
+    if (document.readyState === 'complete') {
+      handleLoad();
+    } else {
+      window.addEventListener('load', handleLoad, { once: true });
+    }
+    
+    // Contador de urgência simplificado
+    const urgencyInterval = setInterval(() => {
+      setUrgencyCount(prev => prev + Math.floor(Math.random() * 3));
+    }, 45000);
     
     return () => {
-      if (urgencyFrameId) {
-        cancelAnimationFrame(urgencyFrameId);
-      }
-      observer.disconnect();
+      clearInterval(urgencyInterval);
     };
   }, []);
   
-  // Função otimizada para iniciar o quiz
+  // Função para iniciar o quiz
   const handleStart = () => {
     // Evitar múltiplos cliques
     if (isLoading) return;
@@ -156,64 +94,40 @@ export default function HomePage() {
     
     try {
       if (typeof window !== 'undefined') {
-        // Usar requestAnimationFrame para animação fluida
-        let progress = 15;
-        let lastTimestamp = 0;
-        let animationId;
+        // Simulação de progresso simplificada
+        const progressInterval = setInterval(() => {
+          setLoadingProgress(prev => {
+            if (prev >= 90) {
+              clearInterval(progressInterval);
+              return prev;
+            }
+            return prev + 5;
+          });
+        }, 100);
         
-        const updateProgress = (timestamp) => {
-          if (!lastTimestamp) lastTimestamp = timestamp;
-          const elapsed = timestamp - lastTimestamp;
-          
-          if (elapsed > 50 && progress < 90) { // Atualizar a cada 50ms
-            progress += 5;
-            setLoadingProgress(progress);
-            lastTimestamp = timestamp;
-          }
-          
-          if (progress < 90) {
-            animationId = requestAnimationFrame(updateProgress);
-          }
-        };
-        
-        animationId = requestAnimationFrame(updateProgress);
-        
-        // Preservar UTMs de forma otimizada
+        // Preservar UTMs
         let targetUrl = '/quiz/1';
         
-        // Verificar UTMs apenas uma vez
         if (window.location.search) {
           const utmParams = new URLSearchParams();
           const currentParams = new URLSearchParams(window.location.search);
           
-          // Extrair apenas parâmetros UTM
           for (const [key, value] of currentParams.entries()) {
             if (key.startsWith('utm_')) {
               utmParams.append(key, value);
             }
           }
           
-          // Adicionar UTMs à URL de destino se existirem
           const utmString = utmParams.toString();
           if (utmString) {
             targetUrl += `?${utmString}`;
           }
         }
         
-        // Navegação otimizada
+        // Navegação simplificada
         setTimeout(() => {
-          if (animationId) {
-            cancelAnimationFrame(animationId);
-          }
+          clearInterval(progressInterval);
           setLoadingProgress(100);
-          
-          // Prefetch da próxima página
-          const link = document.createElement('link');
-          link.rel = 'prefetch';
-          link.href = targetUrl;
-          document.head.appendChild(link);
-          
-          // Navegar após prefetch
           setTimeout(() => router.push(targetUrl), 100);
         }, 800);
       }
@@ -234,9 +148,6 @@ export default function HomePage() {
           href="https://comprarplanseguro.shop/wp-content/uploads/2025/06/Nova-Imagem-Plan-A-Livro.png" 
           as="image"
           fetchpriority="high"
-          type="image/webp" // Sugerir formato moderno
-          imagesizes="112px"
-          imagesrcset="https://comprarplanseguro.shop/wp-content/uploads/2025/06/Nova-Imagem-Plan-A-Livro.webp 112w" // Sugerir versão WebP
         />
         
         {/* Preconnect otimizado */}
@@ -250,211 +161,206 @@ export default function HomePage() {
         
         {/* Otimização de cache */}
         <meta httpEquiv="Cache-Control" content="max-age=86400" />
+        
+        {/* CSS crítico inline */}
+        <style dangerouslySetInnerHTML={{
+          __html: `
+            .lcp-image {
+              width: 112px;
+              height: 112px;
+              object-fit: cover;
+              border-radius: 9999px;
+              border: 4px solid #f97316;
+              box-shadow: 0 10px 15px -3px rgba(249, 115, 22, 0.3);
+              z-index: 10;
+            }
+            .main-card {
+              background: linear-gradient(to bottom right, rgba(17, 24, 39, 0.95), rgba(0, 0, 0, 0.95));
+              backdrop-filter: blur(8px);
+              border: 2px solid rgba(249, 115, 22, 0.3);
+              box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+              border-radius: 0.5rem;
+              padding: 1rem;
+            }
+            @media (min-width: 640px) {
+              .main-card {
+                padding: 2rem;
+              }
+            }
+            .cta-button {
+              background: linear-gradient(to right, #22c55e, #16a34a);
+              color: white;
+              font-weight: bold;
+              padding: 1rem;
+              border-radius: 9999px;
+              box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+              transition: all 300ms;
+              width: 100%;
+              margin-top: 1.5rem;
+            }
+            .cta-button:hover {
+              background: linear-gradient(to right, #16a34a, #15803d);
+              transform: translateY(-2px);
+            }
+            @media (min-width: 640px) {
+              .cta-button {
+                width: auto;
+                padding: 1rem 1.5rem;
+              }
+            }
+            @media (min-width: 768px) {
+              .cta-button {
+                padding: 1rem 2rem;
+                font-size: 1.125rem;
+              }
+            }
+          `
+        }} />
       </Head>
       
-      <div 
-        className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-slate-900 flex items-center justify-center p-4"
-        style={{ minHeight: '100vh' }} // Garantir altura mínima para evitar CLS
-      >
-        {/* Indicador de carga otimizado */}
-        {isLoading && (
-          <div className="fixed inset-0 bg-black/80 flex flex-col items-center justify-center z-50">
-            <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-orange-500 mb-4"></div>
-            <p className="text-white text-lg">{loadingMessage || "Cargando..."}</p>
-            <div className="w-64 h-2 bg-gray-700 rounded-full mt-4">
-              <div 
-                className="h-full bg-orange-500 rounded-full transition-all duration-300"
-                style={{ width: `${loadingProgress}%` }}
-              ></div>
+      {/* Indicador de carga */}
+      {isLoading && (
+        <div className="fixed inset-0 bg-black/80 flex flex-col items-center justify-center z-50">
+          <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-orange-500 mb-4"></div>
+          <p className="text-white text-lg">{loadingMessage || "Cargando..."}</p>
+          <div className="w-64 h-2 bg-gray-700 rounded-full mt-4">
+            <div 
+              className="h-full bg-orange-500 rounded-full transition-all duration-300"
+              style={{ width: `${loadingProgress}%` }}
+            ></div>
+          </div>
+        </div>
+      )}
+      
+      {/* Mensagem de erro condicional */}
+      {errorMessage && (
+        <div className="fixed top-4 left-0 right-0 mx-auto max-w-md bg-red-100 text-red-800 p-4 rounded-lg shadow-lg text-center font-medium z-50">
+          {errorMessage}
+          <button 
+            onClick={() => setErrorMessage("")} 
+            className="ml-2 text-red-600 font-bold"
+            aria-label="Cerrar mensaje de error"
+          >
+            ×
+          </button>
+        </div>
+      )}
+      
+      {/* Alerta de offline condicional */}
+      {!isOnline && (
+        <div className="fixed top-0 left-0 right-0 bg-red-100 text-red-800 p-3 text-center font-medium z-50">
+          Parece que estás sin conexión. Verifica tu internet para continuar.
+        </div>
+      )}
+      
+      {/* Conteúdo principal simplificado */}
+      <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-slate-900 flex items-center justify-center p-4">
+        <div className="max-w-3xl w-full text-center">
+          <div className="main-card">
+            <div className="mb-4 sm:mb-8">
+              {/* Imagem principal otimizada - LCP */}
+              <div className="relative w-24 h-24 sm:w-28 sm:h-28 mx-auto mb-4 sm:mb-6">
+                {/* Efeitos de luz simplificados */}
+                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-orange-500/20 to-red-600/20 blur-lg"></div>
+                
+                {/* Imagem otimizada para LCP */}
+                <img
+                  src="https://comprarplanseguro.shop/wp-content/uploads/2025/06/Nova-Imagem-Plan-A-Livro.png"
+                  alt="Logo Plan A"
+                  width="112"
+                  height="112"
+                  className="lcp-image"
+                  id="lcp-image"
+                  fetchpriority="high"
+                  decoding="async"
+                />
+              </div>
+            </div>
+
+            <div className="mb-6 sm:mb-10">
+              <h1 
+                className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-4 sm:mb-6 leading-tight" 
+                id="lcp-title"
+              >
+                Conheça o <span className="text-red-500">Truco de 3 pasos</span> que está funcionando 
+                <br />
+                <span className="text-red-500">hace que las mujeres regresen incluso después de una traición</span>
+              </h1>
+
+              <p className="text-base sm:text-lg text-white font-semibold mb-2">
+                ✓ Funciona con cualquier mujer...
+              </p>
+              <p className="text-white mb-4 sm:mb-6">
+                sin mensajes largos, desaparecer ni jugar juegos.
+              </p>
+
+              <h2 className="text-lg sm:text-xl font-bold text-green-500 mb-4 sm:mb-6">
+                ✅ ¿Y lo mejor? Es el mismo que usaron grandes celebridades.
+              </h2>
+
+              {/* Imagem com container adequado */}
+              <div className="w-full mb-8">
+                <img 
+                  src="https://comprarplanseguro.shop/wp-content/uploads/2025/06/02-IMAGE-INICIAL-NOVA.png" 
+                  alt="Imagen de ejemplo" 
+                  width="600"
+                  height="400"
+                  className="w-full h-auto rounded-lg"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+
+            <div className="mt-4">
+              {/* Botão com espaçamento adequado */}
+              <button
+                onClick={handleStart}
+                disabled={isLoading || !isOnline}
+                className="cta-button"
+                aria-label="Iniciar test"
+              >
+                {isLoading ? (
+                  <>
+                    <span>PREPARANDO...</span>
+                    <span className="ml-2 inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+                  </>
+                ) : (
+                  <>
+                    QUIERO DESCUBRIR EL TRUCO
+                    <span className="ml-2 inline-block" aria-hidden="true">→</span>
+                  </>
+                )}
+              </button>
+              
+              <div className="text-xs text-gray-400 mt-4 flex items-center justify-center">
+                <span className="mr-1" aria-hidden="true">🔒</span>
+                Tus respuestas son confidenciales y están protegidas
+              </div>
             </div>
           </div>
-        )}
-        
-        {/* Mensagem de erro condicional */}
-        {errorMessage && (
-          <div className="fixed top-4 left-0 right-0 mx-auto max-w-md bg-red-100 text-red-800 p-4 rounded-lg shadow-lg text-center font-medium z-50">
-            {errorMessage}
-            <button 
-              onClick={() => setErrorMessage("")} 
-              className="ml-2 text-red-600 font-bold"
-              aria-label="Cerrar mensaje de error"
-            >
-              ×
-            </button>
-          </div>
-        )}
-        
-        {/* Alerta de offline condicional */}
-        {!isOnline && (
-          <div className="fixed top-0 left-0 right-0 bg-red-100 text-red-800 p-3 text-center font-medium z-50">
-            Parece que estás sin conexión. Verifica tu internet para continuar.
-          </div>
-        )}
-        
-        {/* Conteúdo principal otimizado */}
-        <div className="max-w-3xl w-full text-center">
-          <Card className="bg-gradient-to-br from-gray-900/95 to-black/95 backdrop-blur-lg border-orange-500/30 shadow-2xl border-2">
-            <CardContent className="p-4 sm:p-8">
-              <div className="mb-4 sm:mb-8">
-                {/* Imagem principal otimizada - LCP */}
-                <div 
-                  className="relative w-24 h-24 sm:w-28 sm:h-28 mx-auto mb-4 sm:mb-6"
-                  style={{ aspectRatio: '1/1', minHeight: '96px' }} // Reservar espaço para evitar CLS
-                >
-                  {/* Efeitos de luz simplificados */}
-                  <div className="absolute inset-0 rounded-full bg-gradient-to-r from-orange-500/20 to-red-600/20 blur-lg"></div>
-                  
-                  {/* Imagem otimizada para LCP */}
-                  <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-orange-500 shadow-lg shadow-orange-500/30 z-10">
-                    <Image
-                      src="https://comprarplanseguro.shop/wp-content/uploads/2025/06/Nova-Imagem-Plan-A-Livro.png"
-                      alt="Logo Plan A"
-                      width={112}
-                      height={112}
-                      priority
-                      className="object-cover"
-                      id="lcp-image"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className="mb-6 sm:mb-10">
-                <h1 
-                  className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-4 sm:mb-6 leading-tight" 
-                  id="lcp-title"
-                  style={{ minHeight: '3.5rem' }} // Reservar espaço para evitar CLS
-                >
-                  Conheça o <span className="text-red-500">Truco de 3 pasos</span> que está funcionando 
-                  <br />
-                  <span className="text-red-500">hace que las mujeres regresen incluso después de una traición</span>
-                </h1>
-
-                <p className="text-base sm:text-lg text-white font-semibold mb-2">
-                  ✓ Funciona con cualquier mujer...
-                </p>
-                <p className="text-white mb-4 sm:mb-6">
-                  sin mensajes largos, desaparecer ni jugar juegos.
-                </p>
-
-                <h2 className="text-lg sm:text-xl font-bold text-green-500 mb-4 sm:mb-6">
-                  ✅ ¿Y lo mejor? Es el mismo que usaron grandes celebridades.
-                </h2>
-
-                {/* Imagem otimizada com dimensões explícitas */}
-                <div style={{ aspectRatio: '600/400', maxWidth: '100%', margin: '0 auto', minHeight: '200px' }}>
-                  <Image 
-                    src="https://comprarplanseguro.shop/wp-content/uploads/2025/06/02-IMAGE-INICIAL-NOVA.png" 
-                    alt="Imagen de ejemplo" 
-                    width={600}
-                    height={400}
-                    className="w-full h-auto rounded-lg mb-6 sm:mb-8"
-                    loading="lazy"
-                  />
-                </div>
-              </div>
-
-              <div>
-                {/* Botão otimizado */}
-                <Button
-                  onClick={handleStart}
-                  disabled={isLoading || !isOnline}
-                  size="lg"
-                  className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold py-4 sm:py-5 px-4 sm:px-6 md:px-8 rounded-full text-base sm:text-lg md:text-xl shadow-lg transition-all duration-300 mb-4 w-full sm:w-auto disabled:opacity-70 disabled:cursor-not-allowed"
-                  aria-label="Iniciar test"
-                  style={{ minHeight: '3.5rem' }} // Altura mínima para evitar CLS
-                >
-                  {isLoading ? (
-                    <>
-                      <span>PREPARANDO...</span>
-                      <div className="ml-2 w-4 h-4 sm:w-5 sm:h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                    </>
-                  ) : (
-                    <>
-                      QUIERO DESCUBRIR EL TRUCO
-                      <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-2" aria-hidden="true" />
-                    </>
-                  )}
-                </Button>
-                
-                <div className="text-xs text-gray-400 mt-4 flex items-center justify-center">
-                  <Lock className="w-3 h-3 mr-1" aria-hidden="true" />
-                  Tus respuestas son confidenciales y están protegidas
-                </div>
-              </div>
-            </CardContent>
-          </Card>
         </div>
       </div>
       
       {/* Script otimizado para LCP */}
-      <script type="module" dangerouslySetInnerHTML={{
+      <script dangerouslySetInnerHTML={{
         __html: `
           // Otimização de LCP
-          const markLCP = () => {
-            const lcpImage = document.getElementById('lcp-image');
-            if (lcpImage && !lcpImage.hasAttribute('fetchpriority')) {
-              lcpImage.setAttribute('fetchpriority', 'high');
-            }
-            
-            // Monitorar LCP para otimização
-            if ('PerformanceObserver' in window) {
-              try {
-                new PerformanceObserver((entryList) => {
-                  const entries = entryList.getEntries();
-                  if (entries.length > 0) {
-                    const lcpEntry = entries[entries.length - 1];
-                    const lcpTime = Math.round(lcpEntry.startTime);
-                    
-                    // Reportar LCP apenas se relevante (>2.5s)
-                    if (lcpTime > 2500) {
-                      console.log('LCP:', lcpTime, 'ms');
-                    }
-                  }
-                }).observe({type: 'largest-contentful-paint', buffered: true});
-              } catch (e) {}
-            }
-          };
-          
-          // Executar o mais cedo possível
-          if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', markLCP);
-          } else {
-            markLCP();
-          }
-          
-          // Carregar recursos não críticos depois
-          const loadNonCritical = () => {
-            // Pré-carregar páginas seguintes
-            const nextPages = ['/quiz/1', '/quiz/2'];
-            nextPages.forEach(url => {
-              const link = document.createElement('link');
-              link.rel = 'prefetch';
-              link.href = url;
-              document.head.appendChild(link);
-            });
-          };
-          
-          // Usar requestIdleCallback para carregar recursos não críticos
-          if ('requestIdleCallback' in window) {
-            requestIdleCallback(loadNonCritical, { timeout: 2000 });
-          } else {
-            setTimeout(loadNonCritical, 2000);
-          }
-        `
-      }} />
-      
-      {/* Fallback para navegadores antigos */}
-      <script nomodule dangerouslySetInnerHTML={{
-        __html: `
-          // Versão simplificada para navegadores antigos
-          document.addEventListener('DOMContentLoaded', function() {
-            // Código simplificado para navegadores legados
+          (function() {
+            // Marcar imagem LCP
             var lcpImage = document.getElementById('lcp-image');
             if (lcpImage) {
+              lcpImage.setAttribute('fetchpriority', 'high');
               lcpImage.setAttribute('importance', 'high');
             }
-          });
+            
+            // Precarregar próxima página
+            setTimeout(function() {
+              var link = document.createElement('link');
+              link.rel = 'prefetch';
+              link.href = '/quiz/1';
+              document.head.appendChild(link);
+            }, 1000);
+          })();
         `
       }} />
     </>
