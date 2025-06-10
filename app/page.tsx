@@ -254,20 +254,16 @@ export default function HomePage() {
                   <span className="text-red-500">hace que las mujeres regresen incluso después de una traición</span>
                 </h3>
 
-                <div className="bg-blue-50 border-l-4 border-blue-500 p-6 mb-8">
-                  <p className="text-lg text-blue-800 font-semibold mb-2">
-                    ✓ Funciona con cualquier mujer...
-                  </p>
-                  <p className="text-blue-700">
-                    sin mensajes largos, desaparecer ni jugar juegos.
-                  </p>
-                </div>
+                <p className="text-lg text-white font-semibold mb-2">
+                  ✓ Funciona con cualquier mujer...
+                </p>
+                <p className="text-white mb-6">
+                  sin mensajes largos, desaparecer ni jugar juegos.
+                </p>
 
-                <div className="bg-green-50 border border-green-300 rounded-lg p-6 mb-8">
-                  <h4 className="text-xl font-bold text-green-800 mb-3">
-                    ✅ ¿Y lo mejor? Es el mismo que usaron grandes celebridades.
-                  </h4>
-                </div>
+                <h4 className="text-xl font-bold text-green-500 mb-6">
+                  ✅ ¿Y lo mejor? Es el mismo que usaron grandes celebridades.
+                </h4>
 
                 <img 
                   src="https://comprarplanseguro.shop/wp-content/uploads/2025/06/02-IMAGE-INICIAL-NOVA.png" 
