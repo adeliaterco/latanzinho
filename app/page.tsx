@@ -1,35 +1,35 @@
 "use client"
 
-import { useState, useEffect, lazy, Suspense } from "react"
+import { useState, useEffect } from "react"
 import { ArrowRight, Lock } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { useRouter } from "next/navigation"
 import Head from "next/head"
+import Image from "next/image"
 
-// Función optimizada para enviar eventos a Google Analytics - implementación diferida
+// Função otimizada para enviar eventos ao Google Analytics
 const enviarEvento = (nombre_evento, propriedades = {}) => {
-  // Usar requestIdleCallback para operaciones no críticas
+  if (typeof window === 'undefined') return;
+  
   const runWhenIdle = (callback) => {
-    if (typeof window !== 'undefined') {
-      if ('requestIdleCallback' in window) {
-        window.requestIdleCallback(callback);
-      } else {
-        setTimeout(callback, 200);
-      }
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(callback);
+    } else {
+      setTimeout(callback, 200);
     }
   };
 
   runWhenIdle(() => {
     try {
-      if (typeof window !== 'undefined' && window.gtag) {
+      if (window.gtag) {
         window.gtag('event', nombre_evento, propriedades);
-      } else if (typeof window !== 'undefined') {
+      } else {
         window._gtagEvents = window._gtagEvents || [];
         window._gtagEvents.push({event: nombre_evento, props: propriedades});
       }
     } catch (error) {
-      console.error('Error al enviar evento:', error);
+      // Silenciar erros em produção
     }
   });
 };
@@ -45,66 +45,47 @@ export default function HomePage() {
   const [errorMessage, setErrorMessage] = useState("")
   const [isLowEndDevice, setIsLowEndDevice] = useState(false)
   
-  // Detectar dispositivos de bajo rendimiento - implementación optimizada
+  // Detectar dispositivos de baixo desempenho - implementação otimizada
   useEffect(() => {
     if (typeof window === 'undefined') return;
     
-    // Usar función inmediata para evitar re-renders innecesarios
-    const checkDevice = () => {
-      const isLowEnd = 
-        (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 2) || 
-        (navigator.deviceMemory && navigator.deviceMemory <= 2) ||
-        window.innerWidth < 768;
-      
-      if (isLowEnd !== isLowEndDevice) {
-        setIsLowEndDevice(isLowEnd);
-      }
-      
-      // Verificar conexión solo si es necesario
-      if (navigator.onLine !== isOnline) {
-        setIsOnline(navigator.onLine);
-      }
-    };
+    // Simplificar detecção
+    const isLowEnd = 
+      (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 2) || 
+      (navigator.deviceMemory && navigator.deviceMemory <= 2) ||
+      window.innerWidth < 768;
     
-    // Ejecutar inmediatamente
-    checkDevice();
+    setIsLowEndDevice(isLowEnd);
+    setIsOnline(navigator.onLine);
     
-    // Configurar listeners con throttling
-    let timeoutId;
-    const handleConnectionChange = () => {
-      if (timeoutId) clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => {
-        setIsOnline(navigator.onLine);
-      }, 300);
-    };
-    
+    // Simplificar listeners
+    const handleConnectionChange = () => setIsOnline(navigator.onLine);
     window.addEventListener('online', handleConnectionChange);
     window.addEventListener('offline', handleConnectionChange);
     
     return () => {
       window.removeEventListener('online', handleConnectionChange);
       window.removeEventListener('offline', handleConnectionChange);
-      if (timeoutId) clearTimeout(timeoutId);
     };
-  }, [isOnline, isLowEndDevice]);
+  }, []);
   
-  // Efecto para métricas - implementación optimizada con lazy loading
+  // Efeito para métricas - implementação otimizada
   useEffect(() => {
     if (typeof window === 'undefined') return;
     
-    // Marcar como cargado inmediatamente para mejorar LCP
+    // Marcar como carregado imediatamente para melhorar LCP
     setIsLoaded(true);
     
-    // Usar IntersectionObserver para cargar métricas solo cuando sea visible
+    // Usar IntersectionObserver para carregar métricas apenas quando visível
     const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
-        // Registrar visualización cuando sea visible
+        // Registrar visualização quando visível
         const runMetrics = () => {
           enviarEvento('visualizo_pagina_inicial', {
             device_type: window.innerWidth <= 768 ? 'mobile' : 'desktop'
           });
           
-          // Registrar métricas solo si están disponibles
+          // Registrar métricas apenas se disponíveis
           if ('performance' in window && 'getEntriesByType' in window.performance) {
             const perfEntries = window.performance.getEntriesByType('navigation');
             if (perfEntries && perfEntries.length > 0) {
@@ -118,7 +99,7 @@ export default function HomePage() {
           }
         };
         
-        // Ejecutar métricas después de que la página esté completamente cargada
+        // Executar métricas após a página estar completamente carregada
         if (document.readyState === 'complete') {
           runMetrics();
         } else {
@@ -129,121 +110,110 @@ export default function HomePage() {
       }
     });
     
-    // Observar el elemento principal
+    // Observar o elemento principal
     const mainElement = document.querySelector('.min-h-screen');
     if (mainElement) {
       observer.observe(mainElement);
     }
     
-    // Contador de urgencia optimizado - usar requestAnimationFrame
-    let urgencyIntervalId;
-    let lastUpdateTime = 0;
+    // Contador de urgência otimizado - usar requestAnimationFrame
+    let urgencyUpdateTime = Date.now();
+    let urgencyFrameId;
     
-    const updateUrgencyCount = (timestamp) => {
-      if (timestamp - lastUpdateTime > 45000) { // 45 segundos
-        setUrgencyCount((prev) => prev + Math.floor(Math.random() * 3));
-        lastUpdateTime = timestamp;
+    const updateUrgency = () => {
+      const now = Date.now();
+      if (now - urgencyUpdateTime > 45000) { // 45 segundos
+        setUrgencyCount(prev => prev + Math.floor(Math.random() * 3));
+        urgencyUpdateTime = now;
       }
-      urgencyIntervalId = requestAnimationFrame(updateUrgencyCount);
+      urgencyFrameId = requestAnimationFrame(updateUrgency);
     };
     
-    urgencyIntervalId = requestAnimationFrame(updateUrgencyCount);
-    
-    // Monitorear errores críticos solamente
-    const handleCriticalError = (error) => {
-      if (error && error.message && (
-        error.message.includes('network') || 
-        error.message.includes('fetch') || 
-        error.message.includes('load')
-      )) {
-        console.error('Error crítico:', error);
-        enviarEvento('error_pagina_inicial', {
-          error_message: error.message.substring(0, 100) // Limitar longitud
-        });
-      }
-    };
-    
-    window.addEventListener('error', handleCriticalError);
+    urgencyFrameId = requestAnimationFrame(updateUrgency);
     
     return () => {
-      if (urgencyIntervalId) {
-        cancelAnimationFrame(urgencyIntervalId);
+      if (urgencyFrameId) {
+        cancelAnimationFrame(urgencyFrameId);
       }
-      window.removeEventListener('error', handleCriticalError);
       observer.disconnect();
     };
   }, []);
   
-  // Función optimizada para iniciar el quiz
+  // Função otimizada para iniciar o quiz
   const handleStart = () => {
-    // Evitar múltiples clics
+    // Evitar múltiplos cliques
     if (isLoading) return;
     
-    // Mostrar feedback visual inmediato
+    // Mostrar feedback visual imediato
     setIsLoading(true);
     setLoadingMessage("Preparando tu test personalizado...");
     setLoadingProgress(15);
     
-    // Registrar evento de inicio
+    // Registrar evento de início
     enviarEvento('inicio_quiz', {
       device_type: typeof window !== 'undefined' && window.innerWidth <= 768 ? 'mobile' : 'desktop'
     });
     
     try {
       if (typeof window !== 'undefined') {
-        // Usar requestAnimationFrame para animación fluida
+        // Usar requestAnimationFrame para animação fluida
         let progress = 15;
         let lastTimestamp = 0;
+        let animationId;
         
         const updateProgress = (timestamp) => {
           if (!lastTimestamp) lastTimestamp = timestamp;
           const elapsed = timestamp - lastTimestamp;
           
-          if (elapsed > 50 && progress < 90) { // Actualizar cada 50ms
+          if (elapsed > 50 && progress < 90) { // Atualizar a cada 50ms
             progress += 5;
             setLoadingProgress(progress);
             lastTimestamp = timestamp;
           }
           
           if (progress < 90) {
-            requestAnimationFrame(updateProgress);
+            animationId = requestAnimationFrame(updateProgress);
           }
         };
         
-        requestAnimationFrame(updateProgress);
+        animationId = requestAnimationFrame(updateProgress);
         
-        // Preservar UTMs de forma optimizada
+        // Preservar UTMs de forma otimizada
         let targetUrl = '/quiz/1';
         
-        // Verificar UTMs solo una vez
+        // Verificar UTMs apenas uma vez
         if (window.location.search) {
           const utmParams = new URLSearchParams();
           const currentParams = new URLSearchParams(window.location.search);
           
-          // Extraer solo parámetros UTM
+          // Extrair apenas parâmetros UTM
           for (const [key, value] of currentParams.entries()) {
             if (key.startsWith('utm_')) {
               utmParams.append(key, value);
             }
           }
           
-          // Agregar UTMs a la URL de destino si existen
+          // Adicionar UTMs à URL de destino se existirem
           const utmString = utmParams.toString();
           if (utmString) {
             targetUrl += `?${utmString}`;
           }
         }
         
-        // Navegación optimizada
+        // Navegação otimizada
         setTimeout(() => {
+          if (animationId) {
+            cancelAnimationFrame(animationId);
+          }
           setLoadingProgress(100);
-          // Prefetch de la siguiente página
+          
+          // Prefetch da próxima página
           const link = document.createElement('link');
           link.rel = 'prefetch';
           link.href = targetUrl;
           document.head.appendChild(link);
           
-          // Navegar después de prefetch
+          // Navegar após prefetch
           setTimeout(() => router.push(targetUrl), 100);
         }, 800);
       }
@@ -258,29 +228,35 @@ export default function HomePage() {
   return (
     <>
       <Head>
-        {/* Preload crítico y optimizado */}
+        {/* Preload crítico e otimizado */}
         <link 
           rel="preload" 
           href="https://comprarplanseguro.shop/wp-content/uploads/2025/06/Nova-Imagem-Plan-A-Livro.png" 
           as="image"
           fetchpriority="high"
-          type="image/png"
+          type="image/webp" // Sugerir formato moderno
+          imagesizes="112px"
+          imagesrcset="https://comprarplanseguro.shop/wp-content/uploads/2025/06/Nova-Imagem-Plan-A-Livro.webp 112w" // Sugerir versão WebP
         />
-        {/* Preconnect optimizado */}
+        
+        {/* Preconnect otimizado */}
         <link rel="preconnect" href="https://comprarplanseguro.shop" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://comprarplanseguro.shop" />
         
-        {/* Meta tags optimizados */}
+        {/* Meta tags otimizados */}
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
         <meta name="description" content="Conheça o Truque de 3 etapas que está fazendo mulheres voltarem até depois da traição" />
         <meta name="theme-color" content="#000000" />
         
-        {/* Optimización de cache */}
-        <meta http-equiv="Cache-Control" content="max-age=86400" />
+        {/* Otimização de cache */}
+        <meta httpEquiv="Cache-Control" content="max-age=86400" />
       </Head>
       
-      <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-slate-900 flex items-center justify-center p-4">
-        {/* Indicador de carga optimizado */}
+      <div 
+        className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-slate-900 flex items-center justify-center p-4"
+        style={{ minHeight: '100vh' }} // Garantir altura mínima para evitar CLS
+      >
+        {/* Indicador de carga otimizado */}
         {isLoading && (
           <div className="fixed inset-0 bg-black/80 flex flex-col items-center justify-center z-50">
             <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-orange-500 mb-4"></div>
@@ -294,7 +270,7 @@ export default function HomePage() {
           </div>
         )}
         
-        {/* Mensaje de error condicional */}
+        {/* Mensagem de erro condicional */}
         {errorMessage && (
           <div className="fixed top-4 left-0 right-0 mx-auto max-w-md bg-red-100 text-red-800 p-4 rounded-lg shadow-lg text-center font-medium z-50">
             {errorMessage}
@@ -315,35 +291,40 @@ export default function HomePage() {
           </div>
         )}
         
-        {/* Contenido principal optimizado */}
+        {/* Conteúdo principal otimizado */}
         <div className="max-w-3xl w-full text-center">
           <Card className="bg-gradient-to-br from-gray-900/95 to-black/95 backdrop-blur-lg border-orange-500/30 shadow-2xl border-2">
             <CardContent className="p-4 sm:p-8">
               <div className="mb-4 sm:mb-8">
-                {/* Imagen principal optimizada - LCP */}
-                <div className="relative w-24 h-24 sm:w-28 sm:h-28 mx-auto mb-4 sm:mb-6">
-                  {/* Efectos de luz simplificados */}
+                {/* Imagem principal otimizada - LCP */}
+                <div 
+                  className="relative w-24 h-24 sm:w-28 sm:h-28 mx-auto mb-4 sm:mb-6"
+                  style={{ aspectRatio: '1/1', minHeight: '96px' }} // Reservar espaço para evitar CLS
+                >
+                  {/* Efeitos de luz simplificados */}
                   <div className="absolute inset-0 rounded-full bg-gradient-to-r from-orange-500/20 to-red-600/20 blur-lg"></div>
                   
-                  {/* Imagen optimizada para LCP */}
+                  {/* Imagem otimizada para LCP */}
                   <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-orange-500 shadow-lg shadow-orange-500/30 z-10">
-                    <img
+                    <Image
                       src="https://comprarplanseguro.shop/wp-content/uploads/2025/06/Nova-Imagem-Plan-A-Livro.png"
                       alt="Logo Plan A"
-                      className="w-full h-full object-cover"
-                      fetchpriority="high"
-                      width="112"
-                      height="112"
+                      width={112}
+                      height={112}
+                      priority
+                      className="object-cover"
                       id="lcp-image"
-                      loading="eager"
-                      decoding="async"
                     />
                   </div>
                 </div>
               </div>
 
               <div className="mb-6 sm:mb-10">
-                <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-4 sm:mb-6 leading-tight" id="lcp-title">
+                <h1 
+                  className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-4 sm:mb-6 leading-tight" 
+                  id="lcp-title"
+                  style={{ minHeight: '3.5rem' }} // Reservar espaço para evitar CLS
+                >
                   Conheça o <span className="text-red-500">Truco de 3 pasos</span> que está funcionando 
                   <br />
                   <span className="text-red-500">hace que las mujeres regresen incluso después de una traición</span>
@@ -360,26 +341,28 @@ export default function HomePage() {
                   ✅ ¿Y lo mejor? Es el mismo que usaron grandes celebridades.
                 </h2>
 
-                {/* Imagen optimizada con dimensiones explícitas */}
-                <img 
-                  src="https://comprarplanseguro.shop/wp-content/uploads/2025/06/02-IMAGE-INICIAL-NOVA.png" 
-                  alt="Imagen de ejemplo" 
-                  className="w-full h-auto rounded-lg mb-6 sm:mb-8"
-                  width="600"
-                  height="400"
-                  loading="lazy"
-                  decoding="async"
-                />
+                {/* Imagem otimizada com dimensões explícitas */}
+                <div style={{ aspectRatio: '600/400', maxWidth: '100%', margin: '0 auto', minHeight: '200px' }}>
+                  <Image 
+                    src="https://comprarplanseguro.shop/wp-content/uploads/2025/06/02-IMAGE-INICIAL-NOVA.png" 
+                    alt="Imagen de ejemplo" 
+                    width={600}
+                    height={400}
+                    className="w-full h-auto rounded-lg mb-6 sm:mb-8"
+                    loading="lazy"
+                  />
+                </div>
               </div>
 
               <div>
-                {/* Botón optimizado */}
+                {/* Botão otimizado */}
                 <Button
                   onClick={handleStart}
                   disabled={isLoading || !isOnline}
                   size="lg"
                   className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold py-4 sm:py-5 px-4 sm:px-6 md:px-8 rounded-full text-base sm:text-lg md:text-xl shadow-lg transition-all duration-300 mb-4 w-full sm:w-auto disabled:opacity-70 disabled:cursor-not-allowed"
                   aria-label="Iniciar test"
+                  style={{ minHeight: '3.5rem' }} // Altura mínima para evitar CLS
                 >
                   {isLoading ? (
                     <>
@@ -404,18 +387,17 @@ export default function HomePage() {
         </div>
       </div>
       
-      {/* Script optimizado para LCP */}
-      <script dangerouslySetInnerHTML={{
+      {/* Script otimizado para LCP */}
+      <script type="module" dangerouslySetInnerHTML={{
         __html: `
-          // Optimización de LCP
-          document.addEventListener('DOMContentLoaded', function() {
-            // Marcar elementos críticos
-            const lcpElements = document.querySelectorAll('#lcp-image, #lcp-title');
-            lcpElements.forEach(el => {
-              if (el) el.setAttribute('fetchpriority', 'high');
-            });
+          // Otimização de LCP
+          const markLCP = () => {
+            const lcpImage = document.getElementById('lcp-image');
+            if (lcpImage && !lcpImage.hasAttribute('fetchpriority')) {
+              lcpImage.setAttribute('fetchpriority', 'high');
+            }
             
-            // Monitorear LCP para optimización
+            // Monitorar LCP para otimização
             if ('PerformanceObserver' in window) {
               try {
                 new PerformanceObserver((entryList) => {
@@ -424,7 +406,7 @@ export default function HomePage() {
                     const lcpEntry = entries[entries.length - 1];
                     const lcpTime = Math.round(lcpEntry.startTime);
                     
-                    // Reportar LCP solo si es relevante (>2.5s)
+                    // Reportar LCP apenas se relevante (>2.5s)
                     if (lcpTime > 2500) {
                       console.log('LCP:', lcpTime, 'ms');
                     }
@@ -432,27 +414,47 @@ export default function HomePage() {
                 }).observe({type: 'largest-contentful-paint', buffered: true});
               } catch (e) {}
             }
-            
-            // Cargar recursos no críticos después
-            setTimeout(function() {
-              // Precargar páginas siguientes
-              const nextPages = ['/quiz/1', '/quiz/2'];
-              nextPages.forEach(url => {
-                const link = document.createElement('link');
-                link.rel = 'prefetch';
-                link.href = url;
-                document.head.appendChild(link);
-              });
-            }, 2000);
-          });
+          };
           
-          // Optimización de imágenes
-          if ('loading' in HTMLImageElement.prototype) {
-            const images = document.querySelectorAll('img[loading="lazy"]');
-            images.forEach(img => {
-              img.loading = 'lazy';
-            });
+          // Executar o mais cedo possível
+          if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', markLCP);
+          } else {
+            markLCP();
           }
+          
+          // Carregar recursos não críticos depois
+          const loadNonCritical = () => {
+            // Pré-carregar páginas seguintes
+            const nextPages = ['/quiz/1', '/quiz/2'];
+            nextPages.forEach(url => {
+              const link = document.createElement('link');
+              link.rel = 'prefetch';
+              link.href = url;
+              document.head.appendChild(link);
+            });
+          };
+          
+          // Usar requestIdleCallback para carregar recursos não críticos
+          if ('requestIdleCallback' in window) {
+            requestIdleCallback(loadNonCritical, { timeout: 2000 });
+          } else {
+            setTimeout(loadNonCritical, 2000);
+          }
+        `
+      }} />
+      
+      {/* Fallback para navegadores antigos */}
+      <script nomodule dangerouslySetInnerHTML={{
+        __html: `
+          // Versão simplificada para navegadores antigos
+          document.addEventListener('DOMContentLoaded', function() {
+            // Código simplificado para navegadores legados
+            var lcpImage = document.getElementById('lcp-image');
+            if (lcpImage) {
+              lcpImage.setAttribute('importance', 'high');
+            }
+          });
         `
       }} />
     </>
