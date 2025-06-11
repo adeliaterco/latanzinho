@@ -59,7 +59,7 @@ export default function ResultPage() {
     } catch (error) {
       console.error('Erro ao registrar evento de clique:', error);
     }
-    window.open("https://pay.hotmart.com/D100080158I?checkoutMode=10", "_blank")
+    window.open("https://pay.hotmart.com/F100142422S?off=qqcmu6vg&checkoutMode=10", "_blank")
   }
 
   const scrollToSection = (id: string) => {
